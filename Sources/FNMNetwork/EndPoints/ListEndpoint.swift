@@ -11,11 +11,16 @@ public class ListManager: ObservableObject {
     
     @Published public var listModel = [ListModel]()
     
-    public init() { getList() }
+    public init() {
+        getList { } onFailure: { }
+    }
     
-    public func getList() {
+    public func getList(onSuccess: @escaping () -> (), onFailure: @escaping () -> ()) {
         _ = WebServiceManager.shared.resumeDataTask(with: Router.list) { (data: [ListModel]) in
             self.listModel = data
-        } failure: { error in }
+            onSuccess()
+        } failure: { error in
+            onFailure()
+        }
     }
 }

@@ -4,13 +4,12 @@ import XCTest
 final class RouterTests: XCTestCase {
     
     func testListEndpoint() {
-        let exp = expectation(description: "---Get List Success---")
-        _ = WebServiceManager.shared.List { list in
-            print(list)
+        let exp = expectation(description: "---Get List---")
+        let listManager = ListManager()
+        listManager.getList {
             exp.fulfill()
-        } failure: { error in
+        } onFailure: {
             XCTFail()
-            print(error)
         }
         waitForExpectations(timeout: 30)
     }
