@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ListModel: Codable {
+public struct ListModel: Hashable, Identifiable, Codable {
 
     public let id: Int
     public let title : String
@@ -29,6 +29,15 @@ public struct ListModel: Codable {
         releaseDate = DateFormatter.EEEMMMdyy.string(from: dateString)
         let imageURLString = try container.decode(String.self, forKey: .image)
         image = URL(string: imageURLString)
+    }
+    
+    public init(id: Int, title: String, description: String, author: String, releaseDate: String, image: URL?) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.author = author
+        self.releaseDate = releaseDate
+        self.image = image
     }
 
 }

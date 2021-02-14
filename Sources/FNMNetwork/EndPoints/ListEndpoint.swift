@@ -7,11 +7,15 @@
 
 import Foundation
 
-extension WebServiceManager {
-    public func List(success: @escaping ([ListModel])-> (),
-                                                         failure: @escaping (AppError) -> ()) -> URLSessionTask? {
-
-        
-        return resumeDataTask(with: Router.list, success: success, failure: failure).task
+public class ListManager: ObservableObject {
+    
+    @Published public var listModel = [ListModel]()
+    
+    public init() { getList() }
+    
+    public func getList() {
+        _ = WebServiceManager.shared.resumeDataTask(with: Router.list) { (data: [ListModel]) in
+            self.listModel = data
+        } failure: { error in }
     }
 }
