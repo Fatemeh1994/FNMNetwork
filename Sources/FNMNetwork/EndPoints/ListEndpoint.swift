@@ -7,20 +7,16 @@
 
 import Foundation
 
-public class ListManager: ObservableObject {
-    
-    @Published public var listModel = [ListModel]()
-    
-    public init() {
-        getList { } onFailure: { }
-    }
-    
-    public func getList(onSuccess: @escaping () -> (), onFailure: @escaping () -> ()) {
-        _ = WebServiceManager.shared.resumeDataTask(with: Router.list) { (data: [ListModel]) in
-            self.listModel = data
-            onSuccess()
-        } failure: { error in
-            onFailure()
-        }
+extension WebServiceManager {
+    public func signUp(email: String, password: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+        
+        let parameters = [
+            "email": email,
+            "password": password,
+            "agent_id": UUID().uuidString,
+            "agent_id": "ios"
+        ]
+        
+        return resumeDataTask(with: .signUp(parameters), success: success, failure: failure).task
     }
 }

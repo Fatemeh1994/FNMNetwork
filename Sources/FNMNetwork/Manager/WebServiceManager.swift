@@ -14,40 +14,42 @@ public class WebServiceManager {
     
     public static var shared = WebServiceManager()
     
-    public func resumeDataTask<T: Codable>(with request: Router,
+    public func resumeDataTask<T: Codable, U: Codable>(with request: Router,
                                       success: @escaping (T) -> (),
-                                      failure: @escaping (AppError) -> () ) -> DataRequest {
-        
+                                      failure: @escaping (U?, Error?) -> () ) -> DataRequest {
+    
         return SessionManager.shared.session.request(request).responseData { [weak self] response in
             guard let `self` = self else { return }
+            
             switch response.result {
             case let .success(value):
-                if let response = response.response,
-                    response.statusCode >= 200 && response.statusCode <= 299 {
-                    
+                if let response  = response.response,
+                   response.statusCode >= 200 && response.statusCode <= 299 {
                     do {
                         let result = try self.jsonDecoder.decode(T.self, from: value)
                         success(result)
-                        return
                     } catch {
-                        debugPrint("🦋🦋🦋🦋🦋🦋")
-                        debugPrint(type(of: T.self))
                         debugPrint(error)
-                        debugPrint("🦋🦋🦋🦋🦋🦋")
-                        
                     }
-                    failure(.dataModelMismatch)
+                    
+                } else {
+                    do {
+                        let result = try self.jsonDecoder.decode(U.self, from: value)
+                        failure(result,nil)
+                    } catch {
+                        debugPrint(error)
+                    }
                 }
-    
             case let .failure(error):
-                failure(.networkError(error.failureReason ?? .init()))
-   
+                let error = NSError(domain: error.localizedDescription, code: error.responseCode ?? .zero, userInfo: nil)
+                failure(nil,error)
+
             }
         }
     }
 }
 
 public enum AppError {
-    case dataModelMismatch
-    case networkError(String)
+    case networkError(Error)
+    case serverError(ErrorModel)
 }

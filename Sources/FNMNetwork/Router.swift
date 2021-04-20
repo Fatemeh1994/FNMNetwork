@@ -3,13 +3,17 @@ import Alamofire
 
 public enum Router: URLRequestConvertible {
     
-    case list
+    case signUp(Parameters)
     
-    static var baseURL = URL(string: "https://run.mocky.io/v3/")!
+    static var baseURL = URL(string: "https://pc.sternx.de")!
     
     var method: HTTPMethod { .get }
     
-    var path: String { "de42e6d9-2d03-40e2-a426-8953c7c94fb8" }
+    var path: String {
+        switch self {
+        case .signUp: return "/api/v1/auth/parent/sign-up"
+        }
+    }
     
     public func asURLRequest() throws -> URLRequest {
         let url = Router.baseURL.appendingPathComponent(path)
@@ -21,7 +25,10 @@ public enum Router: URLRequestConvertible {
             request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
         }
         request.method = method
-        request = try URLEncoding.default.encode(request, with: nil)
+        switch self {
+        case let .signUp(parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        }
         return request
     }
     
