@@ -10,7 +10,7 @@ import Foundation
 public class NetworkStorage {
     
     private init() { }
-    public static shared: NetworkStorage = NetworkStorage()
+    public static let shared: NetworkStorage = NetworkStorage()
     
     public var token: String? {
         get {

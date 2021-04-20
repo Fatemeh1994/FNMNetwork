@@ -14,7 +14,7 @@ extension WebServiceManager {
             "email": email,
             "password": password,
             "agent_id": UUID().uuidString,
-            "agent_id": "ios"
+            "platform": "ios"
         ]
         
         return resumeDataTask(with: .signUp(parameters), success: success, failure: failure).task
