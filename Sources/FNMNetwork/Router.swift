@@ -7,7 +7,11 @@ public enum Router: URLRequestConvertible {
     
     static var baseURL = URL(string: "https://pc.sternx.de")!
     
-    var method: HTTPMethod { .get }
+    var method: HTTPMethod {
+        switch self {
+        case .signUp: return .post
+        }
+    }
     
     var path: String {
         switch self {
