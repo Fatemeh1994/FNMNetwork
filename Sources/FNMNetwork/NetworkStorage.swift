@@ -21,4 +21,13 @@ public class NetworkStorage {
         }
     }
     
+    public var email: String? {
+        get {
+            UserDefaults.standard.string(forKey: "Email")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "Email")
+        }
+    }
+    
 }

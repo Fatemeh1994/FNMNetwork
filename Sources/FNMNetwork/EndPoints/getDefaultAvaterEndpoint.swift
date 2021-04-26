@@ -5,13 +5,14 @@
 //  Created by Rasa on 2/6/1400 AP.
 //
 
-import Foundation
+import UIKit
 
 extension WebServiceManager {
-    public func getDefaultAvatar(device_id: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func getDefaultAvatar(success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
+        guard let deviceId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
         let parameters = [
-            "device_id": "600d4ffeea2b566389c7ceb1"
+            "device_id": deviceId
         ]
         
         return resumeDataTask(with: .getDefaultAvatar(parameters), success: success, failure: failure).task

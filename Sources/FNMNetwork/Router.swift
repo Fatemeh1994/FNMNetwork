@@ -8,8 +8,8 @@ public enum Router: URLRequestConvertible {
     case deviceLogin(Parameters)
     case getDefaultAvatar(Parameters)
     case createChild(Parameters)
-    case createDevice(Parameters)
-    case generatePaircode(Parameters)
+    case createDevice(childId: String, Parameters)
+    case generatePaircode(childId: String, Parameters)
     
     
     static var baseURL = URL(string: "https://pc.sternx.de")!
@@ -34,8 +34,8 @@ public enum Router: URLRequestConvertible {
         case .deviceLogin: return "/api/v1/auth/child/sign-in"
         case .getDefaultAvatar: return "/api/v1/statics/avatars/list"
         case .createChild: return "/api/v1/parent/children/create"
-        case .createDevice: return "/api/v1/parent/children/devices/{{child_id}}/create"
-        case .generatePaircode: return "/api/v1/parent/children/devices/{{child_id}}/generate-paircode"
+        case let .createDevice(childId, _): return "/api/v1/parent/children/devices/\(childId)/create"
+        case let .generatePaircode(childId, _): return "/api/v1/parent/children/devices/\(childId)/generate-paircode"
             
         }
     }
@@ -61,9 +61,9 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .createChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .createDevice(parameters):
+        case let .createDevice(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .generatePaircode(parameters):
+        case let .generatePaircode(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request

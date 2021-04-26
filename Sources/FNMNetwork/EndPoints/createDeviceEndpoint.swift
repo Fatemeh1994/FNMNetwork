@@ -8,13 +8,13 @@
 import Foundation
 
 extension WebServiceManager {
-    public func createDevice( success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func createDevice(childId: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
             "platform": "ios"
         ]
         
-        return resumeDataTask(with: .createDevice(parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .createDevice(childId: childId, parameters), success: success, failure: failure).task
     }
     
 }

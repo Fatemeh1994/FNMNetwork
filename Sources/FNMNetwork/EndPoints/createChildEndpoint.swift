@@ -11,10 +11,10 @@ extension WebServiceManager {
     public func createChild(name: String, birthday: String, gender: String, avatar: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
-            "name": "maasd",
-            "birthday": "1960",
-            "gender": "boy",
-            "avatar": "1.svg"
+            "name": name,
+            "birthday": birthday,
+            "gender": gender,
+            "avatar": avatar
         ]
         
         return resumeDataTask(with: .createChild(parameters), success: success, failure: failure).task
