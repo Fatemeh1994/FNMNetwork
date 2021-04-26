@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension WebServiceManager {
     public func deviceLogin(otp: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask?{
@@ -14,7 +15,7 @@ extension WebServiceManager {
             "pair_code": otp,
             "platform": "ios",
             "agent_id": UUID().uuidString,
-            "device_name": "nex"
+            "device_name": UIDevice.current.name
         ]
         
         return resumeDataTask(with: .deviceLogin(parameters), success: success, failure: failure).task

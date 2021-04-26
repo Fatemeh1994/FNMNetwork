@@ -17,7 +17,7 @@ extension WebServiceManager {
             "platform": "ios"
         ]
         
-        return resumeDataTask(with: .signUp(parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .signIn(parameters), success: success, failure: failure).task
     }
     
 }
