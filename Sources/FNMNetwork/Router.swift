@@ -44,11 +44,17 @@ public enum Router: URLRequestConvertible {
         let url = Router.baseURL.appendingPathComponent(path)
         var request: URLRequest
         
+        
         if NetworkState.isInternetAvailable {
             request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         } else {
             request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
         }
+        
+        if let token = NetworkStorage.shared.token {
+            request.addValue("bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
         request.method = method
         switch self {
         case let .signUp(parameters):
