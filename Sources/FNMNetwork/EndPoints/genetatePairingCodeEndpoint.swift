@@ -8,9 +8,7 @@
 import UIKit
 
 extension WebServiceManager {
-    public func generatePaircode(childId: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
-        
-        guard let deviceId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
+    public func generatePaircode(childId: String, deviceId: String, success: @escaping (PairCodeModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
             "device_id": deviceId

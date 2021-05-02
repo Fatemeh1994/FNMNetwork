@@ -8,7 +8,7 @@
 import Foundation
 
 extension WebServiceManager {
-    public func createChild(name: String, birthday: String, gender: String, avatar: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func createChild(name: String, birthday: String, gender: String, avatar: String, success: @escaping (CreateChildModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
             "name": name,
