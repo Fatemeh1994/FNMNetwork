@@ -10,9 +10,10 @@ public enum Router: URLRequestConvertible {
     case createDevice(childId: String, Parameters)
     case generatePaircode(childId: String, Parameters)
     case authChildSignIn(Parameters)
+    case signInAndsignUpWithGoogle(Parameters)
     
     
-    
+        
     static var baseURL = URL(string: "https://pc.sternx.de")!
     
     var method: HTTPMethod {
@@ -24,6 +25,7 @@ public enum Router: URLRequestConvertible {
         case .createDevice: return .post
         case .generatePaircode: return .post
         case .authChildSignIn: return .post
+        case .signInAndsignUpWithGoogle: return .post
         }
     }
     
@@ -35,8 +37,8 @@ public enum Router: URLRequestConvertible {
         case .createChild: return "/api/v1/parent/children/create"
         case let .createDevice(childId, _): return "/api/v1/parent/children/devices/\(childId)/create"
         case let .generatePaircode(childId, _): return "/api/v1/parent/children/devices/\(childId)/generate-paircode"
-            
-        case .authChildSignIn: return "api/v1/auth/child/sign-in"
+        case .authChildSignIn: return "/api/v1/auth/child/sign-in"
+        case .signInAndsignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
         }
     }
     
@@ -71,6 +73,8 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .authChildSignIn(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .signInAndsignUpWithGoogle(parameters):
+                request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
     }

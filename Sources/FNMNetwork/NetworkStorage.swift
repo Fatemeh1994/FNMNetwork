@@ -30,4 +30,22 @@ public class NetworkStorage {
         }
     }
     
+    public var name: String? {
+        get {
+            UserDefaults.standard.string(forKey: "name")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "name")
+        }
+    }
+    
+    public var deviceType: String? {
+        get {
+            UserDefaults.standard.string(forKey: "deviceType")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "deviceType")
+        }
+    }
+    
 }
