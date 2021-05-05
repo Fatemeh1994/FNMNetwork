@@ -47,5 +47,4 @@ public class NetworkStorage {
             UserDefaults.standard.setValue(newValue, forKey: "deviceType")
         }
     }
-    
 }
