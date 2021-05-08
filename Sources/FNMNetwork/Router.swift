@@ -11,6 +11,7 @@ public enum Router: URLRequestConvertible {
     case generatePaircode(childId: String, Parameters)
     case authChildSignIn(Parameters)
     case signInAndsignUpWithGoogle(Parameters)
+    case childrenList(page: Int,count: Int)
     
     
         
@@ -26,6 +27,7 @@ public enum Router: URLRequestConvertible {
         case .generatePaircode: return .post
         case .authChildSignIn: return .post
         case .signInAndsignUpWithGoogle: return .post
+        case .childrenList: return .get
         }
     }
     
@@ -39,6 +41,7 @@ public enum Router: URLRequestConvertible {
         case let .generatePaircode(childId, _): return "/api/v1/parent/children/devices/\(childId)/generate-paircode"
         case .authChildSignIn: return "/api/v1/auth/child/sign-in"
         case .signInAndsignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
+        case let .childrenList(page,count): return "/api/v1/parent/children/list/\(page)/\(count)"
         }
     }
     
@@ -75,6 +78,9 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signInAndsignUpWithGoogle(parameters):
                 request = try JSONEncoding.default.encode(request, with: parameters)
+        case .childrenList:
+                request = try URLEncoding.default.encode(request, with: nil)
+            
         }
         return request
     }

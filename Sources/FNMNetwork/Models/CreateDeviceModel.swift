@@ -19,6 +19,11 @@ public struct CreateDeviceModel: Codable {
     public let createdAt: String
     public let updatedAt: String
     public let version: Int
+    public let status: String?
+    
+    public var isOnline: Bool { status != "offline" }
+        
+    
     
     enum CodingKeys: String, CodingKey {
         case deleted, platform, owner, role, createdAt, updatedAt
@@ -26,5 +31,6 @@ public struct CreateDeviceModel: Codable {
         case deviceId = "_id"
         case version = "__v"
         case parentId = "parent_id"
+        case status
     }
 }
