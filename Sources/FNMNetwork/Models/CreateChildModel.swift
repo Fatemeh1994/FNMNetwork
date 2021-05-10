@@ -12,7 +12,7 @@ public struct CreateChildModel: Codable {
     public let birthday: String
     public let gender: String
     public let avatar: String
-    public let isDefault: Bool
+    public var isDefault: Bool
     public let childId: String
     public let deleted: Bool?
     public let parentId: String?
