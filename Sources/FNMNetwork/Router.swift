@@ -13,6 +13,7 @@ public enum Router: URLRequestConvertible {
     case signInAndsignUpWithGoogle(Parameters)
     case childrenList(page: Int,count: Int)
     case setDefaultChild(Parameters)
+    case resetPassword(Parameters)
     
     
         
@@ -30,6 +31,8 @@ public enum Router: URLRequestConvertible {
         case .signInAndsignUpWithGoogle: return .post
         case .childrenList: return .get
         case .setDefaultChild: return .post
+        case .resetPassword: return .post
+            
         }
     }
     
@@ -45,6 +48,7 @@ public enum Router: URLRequestConvertible {
         case .signInAndsignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
         case let .childrenList(page,count): return "/api/v1/parent/children/list/\(page)/\(count)"
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
+        case .resetPassword: return "/api/v1/auth/parent/reset-password"
         }
     }
     
@@ -84,6 +88,8 @@ public enum Router: URLRequestConvertible {
         case .childrenList:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .resetPassword(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
