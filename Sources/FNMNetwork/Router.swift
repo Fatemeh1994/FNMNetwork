@@ -48,7 +48,7 @@ public enum Router: URLRequestConvertible {
         case .signInAndsignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
         case let .childrenList(page,count): return "/api/v1/parent/children/list/\(page)/\(count)"
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
-        case .resetPassword: return "/api/v1/auth/parent/reset-password"
+        case .resetPassword: return "/api/v1/auth/parent/reset/password"
         }
     }
     
