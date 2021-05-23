@@ -15,8 +15,10 @@ public enum Router: URLRequestConvertible {
     case setDefaultChild(Parameters)
     case resetPassword(Parameters)
     case resetPinCode(Parameters)
-    case verifyResetPassword(token: String, Parameters)
-    case verifyResetPinCode(token: String, Parameters)
+    case verifyResetPassword(Parameters)
+    case verifyResetPinCode(Parameters)
+    case checkPinCode(Parameters)
+//    case updateParent(Parameters)
     
     
         
@@ -38,6 +40,8 @@ public enum Router: URLRequestConvertible {
         case .resetPinCode: return .post
         case .verifyResetPassword: return .post
         case .verifyResetPinCode: return .post
+        case .checkPinCode: return .post
+      
             
         }
     }
@@ -56,8 +60,9 @@ public enum Router: URLRequestConvertible {
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
         case .resetPassword: return "/api/v1/auth/parent/reset/password"
         case .resetPinCode: return "/api/v1/auth/parent/reset/pin-code"
-        case let .verifyResetPassword(token, _): return "/api/v1/auth/parent/verify-reset/password?token=\(token)"
-        case let .verifyResetPinCode(token, _): return "/api/v1/auth/parent/verify-reset/pin-code?token=\(token)"
+        case let .verifyResetPassword: return "/api/v1/auth/parent/verify-reset/password"
+        case let .verifyResetPinCode: return "/api/v1/parent/verify-reset/pin-code"
+        case .checkPinCode: return "/api/v1/parent/pin-code"
         }
     }
     
@@ -102,9 +107,11 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .resetPinCode(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .verifyResetPassword(_, parameters):
+        case let .verifyResetPassword(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .verifyResetPinCode(_ ,parameters):
+        case let .verifyResetPinCode(parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .checkPinCode(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request

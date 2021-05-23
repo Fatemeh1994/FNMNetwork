@@ -8,15 +8,14 @@
 import UIKit
 
 extension WebServiceManager {
-    public func verifyResetPinCode(token: String, pinCode: String, success: @escaping (MessageModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
-        
-        guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
+    public func verifyResetPinCode(code: String, pinCode: String, success: @escaping (MessageModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
-            "pin_code": pinCode
+            "pin_code": pinCode,
+            "code": code
         ]
         
-        return resumeDataTask(with: .verifyResetPinCode(token: token, parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .verifyResetPinCode(parameters), success: success, failure: failure).task
     }
     
     
