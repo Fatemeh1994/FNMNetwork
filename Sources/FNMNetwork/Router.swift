@@ -15,8 +15,8 @@ public enum Router: URLRequestConvertible {
     case setDefaultChild(Parameters)
     case resetPassword(Parameters)
     case resetPinCode(Parameters)
-    case verifyResetPassword(Parameters)
-    case verifyResetPinCode(Parameters)
+    case verifyResetPassword(token: String, Parameters)
+    case verifyResetPinCode(token: String, Parameters)
     
     
         
@@ -56,8 +56,8 @@ public enum Router: URLRequestConvertible {
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
         case .resetPassword: return "/api/v1/auth/parent/reset/password"
         case .resetPinCode: return "/api/v1/auth/parent/reset/pin-code"
-        case .verifyResetPassword: return "/api/v1/auth/parent/verify-reset/password?token="
-        case .verifyResetPinCode: return "/api/v1/auth/parent/verify-reset/pin-code?token="
+        case let .verifyResetPassword(token, _): return "/api/v1/auth/parent/verify-reset/password?token=\(token)"
+        case let .verifyResetPinCode(token, _): return "/api/v1/auth/parent/verify-reset/pin-code?token=\(token)"
         }
     }
     
@@ -102,9 +102,9 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .resetPinCode(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .verifyResetPassword(parameters):
+        case let .verifyResetPassword(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .verifyResetPinCode(parameters):
+        case let .verifyResetPinCode(_ ,parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
