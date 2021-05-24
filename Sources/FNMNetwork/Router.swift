@@ -62,7 +62,7 @@ public enum Router: URLRequestConvertible {
         case let .childrenList(page,count): return "/api/v1/parent/children/list/\(page)/\(count)"
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
         case .resetPassword: return "/api/v1/auth/parent/reset/password"
-        case .resetPinCode: return "/api/v1/auth/parent/reset/pin-code"
+        case .resetPinCode: return "/api/v1/parent/reset/pin-code"
         case .verifyResetPassword: return "/api/v1/auth/parent/verify-reset/password"
         case .verifyResetPinCode: return "/api/v1/parent/verify-reset/pin-code"
         case .checkPinCode: return "/api/v1/parent/pin-code"
