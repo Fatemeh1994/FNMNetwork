@@ -10,7 +10,7 @@ import Foundation
 public struct ErrorModel: Codable {
     
     public let message: String
-    public let errorCode: Int
+    public let errorCode: Int?
     
     enum CodingKeys: String, CodingKey {
         case message

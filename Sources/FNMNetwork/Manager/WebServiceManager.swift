@@ -35,7 +35,8 @@ public class WebServiceManager {
                 } else {
                     do {
                         let result = try self.jsonDecoder.decode(U.self, from: value)
-                        failure(result,nil)
+                        let networkError = NSError(domain: response.response!.description, code: response.response!.statusCode, userInfo: nil)
+                        failure(result,networkError)
                     } catch {
                         debugPrint(error)
                     }

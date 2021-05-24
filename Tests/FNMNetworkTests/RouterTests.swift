@@ -15,7 +15,15 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     }
     
-    
+    func testCheckPinEndpoint() {
+        let exp = expectation(description: "---check pin code---")
+        _ = WebServiceManager.shared.checkPinCode(pinCode: "123456", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
     
     
     func testVerifyResetPasswordEndpoint() {
