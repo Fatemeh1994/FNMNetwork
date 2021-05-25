@@ -30,4 +30,13 @@ public class NetworkStorage {
         }
     }
     
+    public var isParent: Bool? {
+        get {
+            UserDefaults.standard.value(forKey: "IsParent") as? Bool
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "IsParent")
+        }
+    }
+    
 }
