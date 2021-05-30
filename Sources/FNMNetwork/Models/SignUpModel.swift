@@ -9,5 +9,5 @@ import Foundation
 
 public struct SignUpModel: Codable {
     public let token: String
-    public let email: String
+    public let email: String?
 }
