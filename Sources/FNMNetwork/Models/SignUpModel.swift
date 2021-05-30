@@ -9,5 +9,12 @@ import Foundation
 
 public struct SignUpModel: Codable {
     public let token: String
-    public let email: String?
+    public let parentEmail: String?
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case token
+        case parentEmail = "parent_email"
+
+    }
 }
