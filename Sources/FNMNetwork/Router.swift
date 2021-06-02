@@ -20,6 +20,12 @@ public enum Router: URLRequestConvertible {
     case checkPinCode(Parameters)
     case parentMe
     case updateParent(Parameters)
+    case getAppBlockerRules(childId: String, deviceId:String)
+    case updateAppBlockerRules(childId: String, deviceId:String, Parameters)
+    case updateExceptions(childId: String, deviceId: String, Parameters)
+    case getWebContentRule(childId: String, deviceId:String)
+    case updateCategoryRules(childId: String, deviceId: String, Parameters)
+    case deleteExeption(childId: String, deviceId: String, Parameters)
     
     
         
@@ -44,8 +50,13 @@ public enum Router: URLRequestConvertible {
         case .checkPinCode: return .post
         case .parentMe: return .get
         case .updateParent: return .put
-            
-            
+        case .getAppBlockerRules: return .get
+        case .updateAppBlockerRules: return .post
+        case .updateExceptions: return .post
+        case .getWebContentRule: return .get
+        case .updateCategoryRules: return .get
+        case .deleteExeption: return .delete
+
         }
     }
     
@@ -68,6 +79,13 @@ public enum Router: URLRequestConvertible {
         case .checkPinCode: return "/api/v1/parent/pin-code"
         case .parentMe: return "/api/v1/parent/me"
         case .updateParent: return "/api/v1/parent/me"
+        case let .getAppBlockerRules(childId,deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
+        case let .updateAppBlockerRules(childId,deviceId,_): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
+        case let .updateExceptions(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .getWebContentRule(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)"
+        case let .updateCategoryRules(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/category_rules"
+        case let .deleteExeption(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
+            
         }
     }
     
@@ -120,6 +138,17 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
+        case .getAppBlockerRules, .getWebContentRule:
+            request = try URLEncoding.default.encode(request, with: nil)
+        case let .updateAppBlockerRules(_,_, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .updateExceptions(_,_, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .updateCategoryRules(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .deleteExeption(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        
             
         }
         return request
