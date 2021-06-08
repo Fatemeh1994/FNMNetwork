@@ -9,8 +9,8 @@ import Foundation
 
 
 public struct AppsModel: Codable {
-    let name, pk, appID: String
-    let installed: Bool
+    public let name, pk, appID: String
+    public let installed: Bool
 
     enum CodingKeys: String, CodingKey {
         case name, pk

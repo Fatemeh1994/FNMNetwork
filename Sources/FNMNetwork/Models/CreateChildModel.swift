@@ -22,7 +22,6 @@ public struct CreateChildModel: Codable {
    
     
     
-    
     enum CodingKeys: String, CodingKey {
         case name, birthday, gender, avatar
         case isDefault = "is_default"

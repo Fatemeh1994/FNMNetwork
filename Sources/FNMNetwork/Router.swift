@@ -29,7 +29,7 @@ public enum Router: URLRequestConvertible {
     
     
         
-    static var baseURL = URL(string: "https://pc.sternx.de")!
+    static var baseURL = URL(string: "https://pc.pishgamvista.com")!
     
     var method: HTTPMethod {
         switch self {
