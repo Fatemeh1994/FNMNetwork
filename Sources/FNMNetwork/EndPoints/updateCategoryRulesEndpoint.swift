@@ -14,7 +14,7 @@ extension WebServiceManager {
         
         let parameters = [
             "category": category,
-            "is_blocked": isBlocked
+            "is_blocked": isBlocked.description
         ]
         
         return resumeDataTask(with: .updateCategoryRules(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
