@@ -9,7 +9,7 @@ import UIKit
 
 
 extension WebServiceManager {
-    public func getAppBlockerRules(childId: String, deviceId: String, success: @escaping (getAppBlockerRulesModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func getAppBlockerRules(childId: String, deviceId: String, success: @escaping (GetAppBlockerRulesModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
 
         return resumeDataTask(with: .getAppBlockerRules(childId: childId, deviceId: deviceId), success: success, failure: failure).task
     }

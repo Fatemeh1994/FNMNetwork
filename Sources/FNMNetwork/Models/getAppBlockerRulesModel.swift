@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct getAppBlockerRulesModel: Codable {
+public struct GetAppBlockerRulesModel: Codable {
     public let rules: [RulesModel]
     public let apps: [AppsModel]
     public let deleted: Bool

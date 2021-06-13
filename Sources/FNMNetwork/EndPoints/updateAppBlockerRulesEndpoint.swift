@@ -8,7 +8,7 @@
 import UIKit
 
 extension WebServiceManager {
-    public func updateAppBlockerRules(isBlocked: Bool, pk: String, appId: String, childId: String, deviceId: String, success: @escaping (getAppBlockerRulesModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func updateAppBlockerRules(isBlocked: Bool, pk: String, appId: String, childId: String, deviceId: String, success: @escaping (GetAppBlockerRulesModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters: [String: Any] = [
             "is_blocked": isBlocked,
