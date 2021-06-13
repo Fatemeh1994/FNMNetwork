@@ -14,7 +14,7 @@ extension WebServiceManager {
             "domain": domain
         ]
         
-        return resumeDataTask(with: .deleteExeption(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .deleteException(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
     }
     
     

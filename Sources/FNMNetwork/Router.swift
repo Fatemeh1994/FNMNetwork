@@ -25,7 +25,7 @@ public enum Router: URLRequestConvertible {
     case updateExceptions(childId: String, deviceId: String, Parameters)
     case getWebContentRule(childId: String, deviceId:String)
     case updateCategoryRules(childId: String, deviceId: String, Parameters)
-    case deleteExeption(childId: String, deviceId: String, Parameters)
+    case deleteException(childId: String, deviceId: String, Parameters)
     
     
         
@@ -54,8 +54,8 @@ public enum Router: URLRequestConvertible {
         case .updateAppBlockerRules: return .post
         case .updateExceptions: return .post
         case .getWebContentRule: return .get
-        case .updateCategoryRules: return .get
-        case .deleteExeption: return .delete
+        case .updateCategoryRules: return .post
+        case .deleteException: return .delete
 
         }
     }
@@ -84,7 +84,7 @@ public enum Router: URLRequestConvertible {
         case let .updateExceptions(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
         case let .getWebContentRule(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)"
         case let .updateCategoryRules(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/category_rules"
-        case let .deleteExeption(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
+        case let .deleteException(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
             
         }
     }
@@ -146,7 +146,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateCategoryRules(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .deleteExeption(_, _, parameters):
+        case let .deleteException(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         
             

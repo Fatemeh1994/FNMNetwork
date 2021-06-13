@@ -8,12 +8,14 @@
 import Foundation
 
 public struct CategoryRuleModel: Codable {
-    public let rule: [RuleIsBlockedModel]
-    public let id, name: String
+    public let rule: RuleIsBlockedModel
+    public let id: String
+    public let name: String?
+    public let domain: String?
 
     enum CodingKeys: String, CodingKey {
         case rule
         case id = "_id"
-        case name
+        case name, domain
     }
 }

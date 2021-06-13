@@ -12,9 +12,8 @@ import Foundation
 public struct GetWebContentRuleModel: Codable {
     public let deleted: Bool
     public let id, deviceID, childID: String
-    public let exceptions: [ExceptionModel]
+    public let exceptions: [CategoryRuleModel]
     public let categoryRules: [CategoryRuleModel]
-    public let Rule: [RuleIsBlockedModel]
     public let createdAt, updatedAt: String
     public let v: Int
     
@@ -28,7 +27,6 @@ public struct GetWebContentRuleModel: Codable {
         case categoryRules = "category_rules"
         case createdAt, updatedAt
         case v = "__v"
-        case Rule
     }
 }
 
