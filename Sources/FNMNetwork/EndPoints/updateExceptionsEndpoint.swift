@@ -8,15 +8,13 @@
 import UIKit
 
 extension WebServiceManager {
-    public func updateExceptions(childId: String, deviceId: String, title: String, description: String, isAllowed: Bool, coordinates: [[[Double]]], success: @escaping (GetWebContentRuleModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func updateExceptions(childId: String, deviceId: String, domain: String, isBlocked: Bool, success: @escaping (GetWebContentRuleModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
-        let parameters: [String : Any] = [
+        let parameters = [
             "child_id": childId,
             "device_id": deviceId,
-            "title": title,
-            "description": description,
-            "is_allowed": isAllowed,
-            "coordinates": coordinates
+            "domain": domain,
+            "is_blocked": isBlocked.description
         ]
         
         return resumeDataTask(with: .updateExceptions(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
