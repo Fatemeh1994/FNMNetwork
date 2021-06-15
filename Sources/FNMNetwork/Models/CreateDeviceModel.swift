@@ -8,8 +8,8 @@
 import Foundation
 
 public struct CreateDeviceModel: Codable {
-    public let isDefault: Bool
-//    public let topics: []
+    public var isDefault: Bool
+    public let topics: [String]
     public let deviceId: String
     public let deleted: Bool
     public let platform: String
@@ -21,16 +21,12 @@ public struct CreateDeviceModel: Codable {
     public let version: Int
     public let status: String?
     public let isActive: Bool
-    public let agentID: String
-    public let deviceName: String
-    public let displayName: String
-    
-    
+    public let agentID: String?
+    public let deviceName: String?
+    public let displayName: String?
     
     public var isOnline: Bool { status != "offline" }
         
-    
-    
     enum CodingKeys: String, CodingKey {
         case deleted, platform, owner, role, createdAt, updatedAt
         case isDefault = "is_default"
@@ -42,6 +38,7 @@ public struct CreateDeviceModel: Codable {
         case agentID = "agent_id"
         case deviceName = "device_name"
         case displayName = "display_name"
+        case topics
     }
 }
 

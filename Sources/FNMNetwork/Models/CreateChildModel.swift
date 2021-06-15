@@ -18,7 +18,7 @@ public struct CreateChildModel: Codable {
     public let parentId: String?
     public let createdAt: String?
     public let updatedAt: String?
-    public let devices: [CreateDeviceModel]?
+    public var devices: [CreateDeviceModel]?
    
     
     
