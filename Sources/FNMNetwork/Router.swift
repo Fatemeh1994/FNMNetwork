@@ -60,6 +60,7 @@ public enum Router: URLRequestConvertible {
         }
     }
     
+    
     var path: String {
         switch self {
         case .signUp: return "/api/v1/auth/parent/sign-up"
@@ -81,7 +82,7 @@ public enum Router: URLRequestConvertible {
         case .updateParent: return "/api/v1/parent/me"
         case let .getAppBlockerRules(childId,deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
         case let .updateAppBlockerRules(childId,deviceId,_): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
-        case let .updateExceptions(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .updateExceptions(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
         case let .getWebContentRule(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)"
         case let .updateCategoryRules(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/category_rules"
         case let .deleteException(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"

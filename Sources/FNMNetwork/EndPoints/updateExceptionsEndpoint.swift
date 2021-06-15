@@ -11,8 +11,6 @@ extension WebServiceManager {
     public func updateExceptions(childId: String, deviceId: String, domain: String, isBlocked: Bool, success: @escaping (GetWebContentRuleModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
-            "child_id": childId,
-            "device_id": deviceId,
             "domain": domain,
             "is_blocked": isBlocked.description
         ]
