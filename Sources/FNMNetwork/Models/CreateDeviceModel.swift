@@ -43,27 +43,5 @@ public struct CreateDeviceModel: Codable {
 }
 
 
-//
-//{
-//   "is_default":false,
-//   "is_active":true,
-//   "topics":[
-//      
-//   ],
-//   "deleted":false,
-//   "_id":"60ad24203791fc5ef25a13dc",
-//   "platform":"ios",
-//   "owner":"60ad241e3791fc5ef25a13db",
-//   "parent_id":"60ace0cb0aeec83f22d2516a",
-//   "role":"child",
-//   "createdAt":"2021-05-25T16:21:52.498Z",
-//   "updatedAt":"2021-06-15T10:58:30.454Z",
-//   "__v":0,
-//   "agent_id":"57AF150B-022C-4966-B769-4B33B04D782E",
-//   "device_name":"Reza iPhone",
-//   "display_name":"57AF150B-022C-4966-B769-4B33B04D782E_ios",
-//   "status":"offline"
-//}
-
 
 
