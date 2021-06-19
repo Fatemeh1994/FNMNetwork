@@ -11,7 +11,12 @@ import Foundation
 public struct LocationModel: Codable {
    
     public let coordinates: [Double]
-    public let type: String
+    public let type: TypeEnum
     
-
+    enum TypeEnum: String, Codable {
+        case point = "Point"
+    }
 }
+
+
+
