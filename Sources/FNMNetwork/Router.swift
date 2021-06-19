@@ -100,12 +100,17 @@ public enum Router: URLRequestConvertible {
         let url = Router.baseURL.appendingPathComponent(path)
         var request: URLRequest
         
-        
-        if NetworkState.isInternetAvailable {
-            request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
-        } else {
-            request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
+        request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+        if !NetworkState.isInternetAvailable {
+            Messages.shared.show(title: "internet conection is lost", message: .init(), theme: .error)
         }
+        /*
+         if NetworkState.isInternetAvailable {
+         request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+         } else {
+         request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
+         }
+         */
         
         if let token = NetworkStorage.shared.token {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

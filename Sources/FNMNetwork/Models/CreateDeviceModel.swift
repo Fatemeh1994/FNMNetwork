@@ -8,6 +8,7 @@
 import Foundation
 
 public struct CreateDeviceModel: Codable {
+    
     public var isDefault: Bool
     public let topics: [String]
     public let deviceId: String
@@ -39,6 +40,25 @@ public struct CreateDeviceModel: Codable {
         case deviceName = "device_name"
         case displayName = "display_name"
         case topics
+    }
+    
+    public init(isDefault: Bool, topics: [String], deviceId: String, deleted: Bool, platform: String, owner: String, parentId: String, role: String, createdAt: String, updatedAt: String, version: Int, status: String?, isActive: Bool, agentID: String?, deviceName: String?, displayName: String?) {
+        self.isDefault = isDefault
+        self.topics = topics
+        self.deviceId = deviceId
+        self.deleted = deleted
+        self.platform = platform
+        self.owner = owner
+        self.parentId = parentId
+        self.role = role
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.version = version
+        self.status = status
+        self.isActive = isActive
+        self.agentID = agentID
+        self.deviceName = deviceName
+        self.displayName = displayName
     }
 }
 
