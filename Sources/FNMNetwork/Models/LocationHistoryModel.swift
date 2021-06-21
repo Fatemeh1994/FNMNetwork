@@ -13,10 +13,10 @@ public struct LocationHistoryModel: Codable {
     public let location: LocationModel
     public let deleted: Bool
     public let id: String
-    public let deviceID: DeviceID
-    public let childID: ChildID
+//    public let deviceID: DeviceID
+//    public let childID: ChildID
     public let metaData: MetaDataModel
-    public let time: LocationHistoryModelTime
+//    public let time: LocationHistoryModelTime
     public let createdAt, updatedAt: String
     public let v: Int
     public let batteryStatus: BatteryStatus
@@ -24,10 +24,10 @@ public struct LocationHistoryModel: Codable {
     enum CodingKeys: String, CodingKey {
         case location, deleted
         case id = "_id"
-        case deviceID = "device_id"
-        case childID = "child_id"
+//        case deviceID = "device_id"
+//        case childID = "child_id"
         case metaData = "meta_data"
-        case time, createdAt, updatedAt
+        case createdAt, updatedAt
         case v = "__v"
         case batteryStatus = "battery_status"
     }

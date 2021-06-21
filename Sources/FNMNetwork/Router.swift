@@ -28,6 +28,8 @@ public enum Router: URLRequestConvertible {
     case deleteException(childId: String, deviceId: String, Parameters)
     case getLastLocation(childId: String, deviceId: String)
     case locationHistory(childId: String, deviceId: String, start: String, end: String)
+    case deleteFence(childId: String, deviceId: String, Parameters)
+    case addFences(childId: String, deviceId: String, Parameters)
     
     
         
@@ -60,6 +62,8 @@ public enum Router: URLRequestConvertible {
         case .deleteException: return .delete
         case .getLastLocation: return .get
         case .locationHistory: return .get
+        case .deleteFence: return .delete
+        case .addFences: return .post
 
         }
     }
@@ -92,6 +96,8 @@ public enum Router: URLRequestConvertible {
         case let .deleteException(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
         case let .getLastLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/locations/last-one/\(deviceId)"
         case let .locationHistory(childId, deviceId, start, end): return "/api/v1/parent/children/devices/\(childId)/locations/list/\(deviceId)/\(start)/\(end)"
+        case let .deleteFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .addFences(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
             
         }
     }
@@ -159,6 +165,10 @@ public enum Router: URLRequestConvertible {
         case let .updateCategoryRules(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .deleteException(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .deleteFence(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .addFences(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         
             
