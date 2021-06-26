@@ -6,7 +6,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "F@g.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "fnajafimoghadam@gmail.com", password: "F12345678", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -14,7 +14,38 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
-    
+    func testSignUpEndpoint() {
+        let exp = expectation(description: "---User sign up---")
+        _ = WebServiceManager.shared.signUp(email: "fnajafimoghadam@gmail.com", password: "F12345678", success: { response in
+            NetworkStorage.shared.token = response.token
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    func testCreateChildEndpoint() {
+        let exp = expectation(description: "---Create Child---")
+        _ = WebServiceManager.shared.createChild(name: "mamad", birthday: "2020", gender: "boy", avatar: "1.svg", success: { response in
+            //
+            print(response.childId)
+            
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    func testCreateDeviceEndpoint() {
+        let exp = expectation(description: "---Create Device---")
+        _ = WebServiceManager.shared.createDevice(childId: "60d716731074ec7d914fa90b", platform: "android", success: { response in
+            print(response.deviceId)
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
     func testCheckPinEndpoint() {
         let exp = expectation(description: "---check pin code---")
         _ = WebServiceManager.shared.checkPinCode(pinCode: "123456", success: { response in
@@ -27,7 +58,7 @@ final class RouterTests: XCTestCase {
     
     func testGetAppBlockerRules(){
         let exp = expectation(description: "---get app list---")
-        _ = WebServiceManager.shared.getAppBlockerRules(childId: "60ad241e3791fc5ef25a13db", deviceId: "60ad24203791fc5ef25a13dc", success: { (response) in
+        _ = WebServiceManager.shared.getAppBlockerRules(childId: "60d716731074ec7d914fa90b", deviceId: "60d716f91074ec7d914fa916", success: { (response) in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknow")
@@ -36,10 +67,9 @@ final class RouterTests: XCTestCase {
     }
     
     func testVerifyResetPasswordEndpoint() {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImYubmFqYWZpbW9naGFkYW1AZ21haWwuY29tIiwiaWF0IjoxNjIxNjk5ODk4LCJleHAiOjE2MjE3MDAxOTh9.dqdZ8WRyfvmSTmHpghIcHEIPMn2uHXQ6fxeffEF4c2s"
         
         let exp = expectation(description: "---Verify Reset Password---")
-        _ = WebServiceManager.shared.verifyResetPassword(token: token , password: "A12345678", success: { response in
+        _ = WebServiceManager.shared.verifyResetPassword(token: NetworkStorage.shared.token!  , password: "F12345678", success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
@@ -47,6 +77,14 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 4)
     }
     
-    
+    func testLocationHistoryEndpoint() {
+        let exp = expectation(description: "---Location History---")
+        _ = WebServiceManager.shared.locationHistory(chilId: "60d716731074ec7d914fa90b", deviceId: "60d716f91074ec7d914fa916", start: "1624000371000", end: "1624705559000", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 4)
+    }
 
 }
