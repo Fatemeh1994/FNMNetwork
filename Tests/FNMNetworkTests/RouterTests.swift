@@ -79,7 +79,7 @@ final class RouterTests: XCTestCase {
     
     func testLocationHistoryEndpoint() {
         let exp = expectation(description: "---Location History---")
-        _ = WebServiceManager.shared.locationHistory(chilId: "60d716731074ec7d914fa90b", deviceId: "60d716f91074ec7d914fa916", start: "1624000371000", end: "1624705559000", success: { response in
+        _ = WebServiceManager.shared.locationHistory(childId: "60d81cc463140701611b106d", deviceId: "60d81cc663140701611b106e", start: "1624760208000", end: "1624782508000", success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
