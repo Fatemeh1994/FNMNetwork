@@ -10,7 +10,7 @@ import Foundation
 public struct ParentMeModel: Codable {
     public let children, devices: [String]
     public let deleted: Bool
-    public let id, password, email, role: String
+    public let id, email, role: String
     public let createdAt, updatedAt: String
     public let v: Int
     public let hasPinCode: Bool
@@ -18,7 +18,7 @@ public struct ParentMeModel: Codable {
     enum CodingKeys: String, CodingKey {
         case children, devices, deleted
         case id = "_id"
-        case password, email, role, createdAt, updatedAt
+        case email, role, createdAt, updatedAt
         case v = "__v"
         case hasPinCode = "has_pin_code"
     }

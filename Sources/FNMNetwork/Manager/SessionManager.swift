@@ -21,9 +21,12 @@ class SessionManager {
         configuration.timeoutIntervalForRequest = 20
         let delegate = Session.default.delegate
         let eventMonitors = [Logger()]
+        
+//        let serverTrustManager = ServerTrustManager(evaluators: ["pc.pishgamvista.com": DisabledTrustEvaluator()])
+        
         let manager = Session(configuration: configuration,
                                    delegate: delegate,
-                                   interceptor: Interceptor(adapter: adopter, retrier: Retrier()) ,
+                                   interceptor: Interceptor(adapter: adopter, retrier: Retrier()),
                                    eventMonitors: eventMonitors)
         return manager
     }()

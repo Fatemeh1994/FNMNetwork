@@ -108,7 +108,7 @@ public enum Router: URLRequestConvertible {
         
         request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         if !NetworkState.isInternetAvailable {
-            Messages.shared.show(title: "internet conection is lost", message: .init(), theme: .error)
+            Messages.shared.show(title: "internet connection is lost", message: .init(), theme: .error)
         }
         /*
          if NetworkState.isInternetAvailable {
