@@ -5,6 +5,8 @@ public enum Router: URLRequestConvertible {
     
     case signUp(Parameters)
     case signIn(Parameters)
+    case uploadAvatar(childId: String, Parameters)
+    case removeAvatar(childId: String)
     case getDefaultAvatar(Parameters)
     case createChild(Parameters)
     case createDevice(childId: String, Parameters)
@@ -64,6 +66,8 @@ public enum Router: URLRequestConvertible {
         case .locationHistory: return .get
         case .deleteFence: return .delete
         case .addFences: return .post
+        case .uploadAvatar: return .post
+        case .removeAvatar: return .delete
 
         }
     }
@@ -98,6 +102,8 @@ public enum Router: URLRequestConvertible {
         case let .locationHistory(childId, deviceId, start, end): return "/api/v1/parent/children/devices/\(childId)/locations/list/\(deviceId)/\(start)/\(end)"
         case let .deleteFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
         case let .addFences(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .uploadAvatar(childId, _): return "/api/v1/parent/children/upload-avatar/\(childId)"
+        case let .removeAvatar(childId): return "/api/v1/parent/children/remove-avatar/\(childId)"
             
         }
     }
@@ -140,7 +146,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signInAndsignUpWithGoogle(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .childrenList, .parentMe:
+        case .childrenList, .parentMe, .removeAvatar:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -170,8 +176,8 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .addFences(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        
-            
+        case let .uploadAvatar(_, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
     }

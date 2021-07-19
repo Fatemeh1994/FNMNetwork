@@ -17,5 +17,5 @@ extension WebServiceManager {
         return resumeDataTask(with: .generatePaircode(childId: childId, parameters), success: success, failure: failure).task
     }
     
-    
+
 }
