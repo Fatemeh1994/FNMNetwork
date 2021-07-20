@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension WebServiceManager {
-    public func signInAndsignUpWithGoogle(token: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func signInAndSignUpWithGoogle(token: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
         
@@ -19,7 +19,7 @@ extension WebServiceManager {
             "platform": "ios"
         ]
         
-        return resumeDataTask(with: .signInAndsignUpWithGoogle(parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .signInAndSignUpWithGoogle(parameters), success: success, failure: failure).task
     }
     
 }

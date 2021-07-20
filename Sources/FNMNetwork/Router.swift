@@ -10,9 +10,9 @@ public enum Router: URLRequestConvertible {
     case getDefaultAvatar
     case createChild(Parameters)
     case createDevice(childId: String, Parameters)
-    case generatePaircode(childId: String, Parameters)
+    case generatePairCode(childId: String)
     case authChildSignIn(Parameters)
-    case signInAndsignUpWithGoogle(Parameters)
+    case signInAndSignUpWithGoogle(Parameters)
     case childrenList(page: Int,count: Int)
     case setDefaultChild(Parameters)
     case resetPassword(Parameters)
@@ -44,9 +44,9 @@ public enum Router: URLRequestConvertible {
         case .getDefaultAvatar: return .get
         case .createChild: return .post
         case .createDevice: return .post
-        case .generatePaircode: return .post
+        case .generatePairCode: return .get
         case .authChildSignIn: return .post
-        case .signInAndsignUpWithGoogle: return .post
+        case .signInAndSignUpWithGoogle: return .post
         case .childrenList: return .get
         case .setDefaultChild: return .post
         case .resetPassword: return .post
@@ -80,9 +80,9 @@ public enum Router: URLRequestConvertible {
         case .getDefaultAvatar: return "/api/v1/statics/defualt-avatars-list"
         case .createChild: return "/api/v1/parent/children/create"
         case let .createDevice(childId, _): return "/api/v1/parent/children/devices/\(childId)/create"
-        case let .generatePaircode(childId, _): return "/api/v1/parent/children/devices/\(childId)/generate-paircode"
+        case let .generatePairCode(childId): return "/api/v1/parent/children/\(childId)/generate-paircode"
         case .authChildSignIn: return "/api/v1/auth/child/sign-in"
-        case .signInAndsignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
+        case .signInAndSignUpWithGoogle: return "/api/v1/auth/parent/google/sign-in"
         case let .childrenList(page,count): return "/api/v1/parent/children/list/\(page)/\(count)"
         case .setDefaultChild: return "/api/v1/parent/children/set-default"
         case .resetPassword: return "/api/v1/auth/parent/reset/password"
@@ -138,13 +138,11 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .createDevice(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .generatePaircode(_, parameters):
-            request = try JSONEncoding.default.encode(request, with: parameters)
         case let .authChildSignIn(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .signInAndsignUpWithGoogle(parameters):
+        case let .signInAndSignUpWithGoogle(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .childrenList, .parentMe, .removeAvatar:
+        case .childrenList, .parentMe, .removeAvatar, .generatePairCode:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)

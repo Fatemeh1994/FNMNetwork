@@ -6,7 +6,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "fnajafimoghadam@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "f.najafimoghadam@gmail.com", password: "F12345678", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -16,7 +16,7 @@ final class RouterTests: XCTestCase {
     }
     func testSignUpEndpoint() {
         let exp = expectation(description: "---User sign up---")
-        _ = WebServiceManager.shared.signUp(email: "fnajafimoghadam@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signUp(email: "f.najafimoghadam@gmail.com", password: "F12345678", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -26,7 +26,7 @@ final class RouterTests: XCTestCase {
     }
     func testCreateChildEndpoint() {
         let exp = expectation(description: "---Create Child---")
-        _ = WebServiceManager.shared.createChild(name: "mamad", birthday: "2020", gender: "boy", avatar: "1.svg", success: { response in
+        _ = WebServiceManager.shared.createChild(name: "reza", birthday: "2020", gender: "boy", avatar: "1.svg", success: { response in
             //
             print(response.childId)
             
@@ -87,4 +87,27 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 4)
     }
 
+    
+    func testGetDefaultAvatarEndpoint() {
+        let exp = expectation(description: "---Get List Avaters---")
+        _ = WebServiceManager.shared.getDefaultAvatar(success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    
+    func testGeneratePairCodeEndpoint() {
+        let exp = expectation(description: "---Get  Pair Code---")
+        _ = WebServiceManager.shared.generatePairCode(childId: "60f6d4e8d46d3347cf68ba4d", success: { response in
+            exp.fulfill()
+                }, failure: { serverError, networkError in
+                    XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+                })
+        waitForExpectations(timeout: 4)
+    }
+    
+    
 }
