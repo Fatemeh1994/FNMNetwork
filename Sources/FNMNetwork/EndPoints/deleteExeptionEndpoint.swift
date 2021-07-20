@@ -8,7 +8,7 @@
 import UIKit
 
 extension WebServiceManager {
-    public func deleteExeption(childId: String, deviceId: String, domain: String, success: @escaping (GetWebContentRuleModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func deleteException(childId: String, deviceId: String, domain: String, success: @escaping (GetWebContentRuleModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
             "domain": domain
