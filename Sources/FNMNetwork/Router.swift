@@ -7,7 +7,7 @@ public enum Router: URLRequestConvertible {
     case signIn(Parameters)
     case uploadAvatar(childId: String, Parameters)
     case removeAvatar(childId: String)
-    case getDefaultAvatar(Parameters)
+    case getDefaultAvatar
     case createChild(Parameters)
     case createDevice(childId: String, Parameters)
     case generatePaircode(childId: String, Parameters)
@@ -77,7 +77,7 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .signUp: return "/api/v1/auth/parent/sign-up"
         case .signIn: return "/api/v1/auth/parent/sign-in"
-        case .getDefaultAvatar: return "/api/v1/statics/avatars/list"
+        case .getDefaultAvatar: return "/api/v1/statics/defualt-avatars-list"
         case .createChild: return "/api/v1/parent/children/create"
         case let .createDevice(childId, _): return "/api/v1/parent/children/devices/\(childId)/create"
         case let .generatePaircode(childId, _): return "/api/v1/parent/children/devices/\(childId)/generate-paircode"
@@ -134,8 +134,6 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signIn(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .getDefaultAvatar(parameters):
-            request = try JSONEncoding.default.encode(request, with: parameters)
         case let .createChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .createDevice(_, parameters):
@@ -162,7 +160,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory :
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar :
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
