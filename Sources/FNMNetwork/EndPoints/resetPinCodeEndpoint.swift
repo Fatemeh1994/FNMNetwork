@@ -10,7 +10,7 @@ import UIKit
 extension WebServiceManager {
     public func resetPinCode(email: String, success: @escaping (MessageModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
-        guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
+//        guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
         
         let parameters = [
             "email": email

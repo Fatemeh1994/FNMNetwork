@@ -35,7 +35,7 @@ public enum Router: URLRequestConvertible {
     
     
         
-    static var baseURL = URL(string: "https://pc.pishgamvista.com")!
+    static var baseURL: URL = URL(string: "https://pc.pishgamvista.com")!
     
     var method: HTTPMethod {
         switch self {
@@ -109,7 +109,7 @@ public enum Router: URLRequestConvertible {
     }
     
     public func asURLRequest() throws -> URLRequest {
-        let url = Router.baseURL.appendingPathComponent(path)
+        let url = Self.baseURL.appendingPathComponent(path)
         var request: URLRequest
         
         request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
