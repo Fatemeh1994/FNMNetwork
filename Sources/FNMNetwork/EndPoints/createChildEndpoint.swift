@@ -14,9 +14,9 @@ extension WebServiceManager {
             "name": name,
             "birthday": birthday,
             "gender": gender,
-            "avatar": "https://pc.sternx.de/api/v1/statics/avatars/get/1.svg"
+            "avatar": avatar
         ]
-        
+//        "https://pc.sternx.de/api/v1/statics/avatars/get/1.svg"
         return resumeDataTask(with: .createChild(parameters), success: success, failure: failure).task
     }
     
