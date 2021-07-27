@@ -24,18 +24,18 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
-    func testCreateChildEndpoint() {
-        let exp = expectation(description: "---Create Child---")
-        _ = WebServiceManager.shared.createChild(name: "reza", birthday: "2020", gender: "boy", avatar: "1.svg", success: { response in
-            //
-            print(response.childId)
-            
-            exp.fulfill()
-        }, failure: { serverError, networkError in
-            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-        })
-        waitForExpectations(timeout: 8)
-    }
+//    func testCreateChildEndpoint() {
+//        let exp = expectation(description: "---Create Child---")
+//        _ = WebServiceManager.shared.createChild(name: "reza", birthday: "2020", gender: "boy", avatar: "public/avatars/1.svg", success: { response in
+//            //
+//            print(response.childId)
+//
+//            exp.fulfill()
+//        }, failure: { serverError, networkError in
+//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+//        })
+//        waitForExpectations(timeout: 8)
+//    }
     func testCreateDeviceEndpoint() {
         let exp = expectation(description: "---Create Device---")
         _ = WebServiceManager.shared.createDevice(childId: "60d716731074ec7d914fa90b", platform: "android", success: { response in
@@ -109,5 +109,14 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 4)
     }
     
-    
+//    func testGetLastLocationEndpoint() {
+//        let exp = expectation(description: "---Get  Last Location---")
+//        _ = WebServiceManager.shared.getLastLocation(childId: "", deviceId: "", success: { response in
+//            exp.fulfill()
+//        }, failure: { serverError, networkError in
+//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+//        })
+//        waitForExpectations(timeout: 4)
+//    
+//}
 }
