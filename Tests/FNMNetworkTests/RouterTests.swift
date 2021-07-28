@@ -6,7 +6,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "f.najafimoghadam@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "Mmad@gmail.com", password: "F12345678", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -24,12 +24,10 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
+    
 //    func testCreateChildEndpoint() {
 //        let exp = expectation(description: "---Create Child---")
-//        _ = WebServiceManager.shared.createChild(name: "reza", birthday: "2020", gender: "boy", avatar: "public/avatars/1.svg", success: { response in
-//            //
-//            print(response.childId)
-//
+//        _ = WebServiceManager.shared.createChild(name: "reza2", birthday: "2020", gender: "boy", avatar: <#T##URL?#>, success: { response in
 //            exp.fulfill()
 //        }, failure: { serverError, networkError in
 //            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
@@ -101,22 +99,22 @@ final class RouterTests: XCTestCase {
     
     func testGeneratePairCodeEndpoint() {
         let exp = expectation(description: "---Get  Pair Code---")
-        _ = WebServiceManager.shared.generatePairCode(childId: "60f6d4e8d46d3347cf68ba4d", success: { response in
+        _ = WebServiceManager.shared.generatePairCode(childId: "610115a563522115ae5c8171", success: { response in
             exp.fulfill()
                 }, failure: { serverError, networkError in
                     XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
                 })
-        waitForExpectations(timeout: 4)
+        waitForExpectations(timeout: 8)
     }
     
-//    func testGetLastLocationEndpoint() {
-//        let exp = expectation(description: "---Get  Last Location---")
-//        _ = WebServiceManager.shared.getLastLocation(childId: "", deviceId: "", success: { response in
-//            exp.fulfill()
-//        }, failure: { serverError, networkError in
-//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-//        })
-//        waitForExpectations(timeout: 4)
-//    
-//}
+    func testGetLastLocationEndpoint() {
+        let exp = expectation(description: "---Get  Last Location---")
+        _ = WebServiceManager.shared.getLastLocation(childId: "610115a563522115ae5c8171", deviceId: "6101302c37a27b15a7bc727c", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    
+}
 }
