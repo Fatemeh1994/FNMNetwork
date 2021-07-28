@@ -25,15 +25,15 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     }
     
-//    func testCreateChildEndpoint() {
-//        let exp = expectation(description: "---Create Child---")
-//        _ = WebServiceManager.shared.createChild(name: "reza2", birthday: "2020", gender: "boy", avatar: <#T##URL?#>, success: { response in
-//            exp.fulfill()
-//        }, failure: { serverError, networkError in
-//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-//        })
-//        waitForExpectations(timeout: 8)
-//    }
+    func testCreateChildEndpoint() {
+        let exp = expectation(description: "---Create Child---")
+        _ = WebServiceManager.shared.createChild(name: "reza2", birthday: "2020", gender: "boy", avatar: URL(string: "https://pc.sternx.de/api/v1/statics/avatars/get/1.svg"), success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
     func testCreateDeviceEndpoint() {
         let exp = expectation(description: "---Create Device---")
         _ = WebServiceManager.shared.createDevice(childId: "60d716731074ec7d914fa90b", platform: "android", success: { response in
