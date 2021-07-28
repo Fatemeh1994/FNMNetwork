@@ -9,7 +9,7 @@ import UIKit
 
 
 extension WebServiceManager {
-    public func getLastLocation(childId: String, deviceId: String, success: @escaping (GetLastLocationModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func getLastLocation(childId: String, deviceId: String, success: @escaping ([GetLastLocationModel]) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
 
         return resumeDataTask(with: .getLastLocation(childId: childId, deviceId: deviceId), success: success, failure: failure).task
     }
