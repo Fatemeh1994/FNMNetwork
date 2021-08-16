@@ -17,12 +17,13 @@ public struct LocationHistoryModel: Codable {
 //    public let childID: String
 //    public let metaData: MetaDataModel
 ////    public let time: LocationHistoryModelTime
-//    public let createdAt, updatedAt: String
+    public let createdAt, updatedAt: String
 //    public let v: Int
 //    public let batteryStatus: BatteryStatus
 
     enum CodingKeys: String, CodingKey {
         case location
+        case createdAt, updatedAt
 //        case deleted
 //        case id = "_id"
 //        case deviceID = "device_id"
