@@ -10,7 +10,7 @@ import Foundation
 
 
 extension WebServiceManager {
-    public func locationHistory(childId: String, deviceId: String, start: String, end: String, success: @escaping ([LocationHistoryModel]) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func locationHistory(childId: String, deviceId: String, start: String, end: String, success: @escaping ([GetLastLocationModel]) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         
         
