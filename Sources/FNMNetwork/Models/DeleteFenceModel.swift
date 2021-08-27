@@ -11,7 +11,7 @@ import Foundation
 public struct DeleteFenceModel: Codable {
     public let deleted: Bool
     public let id, deviceID, childID: String
-    public let fences: [FenceModel]
+    public let fences: [CreateFenceModel]
     public let createdAt, updatedAt: String
     public let v: Int
 

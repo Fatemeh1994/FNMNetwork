@@ -18,7 +18,7 @@ extension WebServiceManager {
             "is_allowed": isAllowed
         ]
         
-        return resumeDataTask(with: .addFences(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
+        return resumeDataTask(with: .createFence(childId: childId, deviceId: deviceId, parameters), success: success, failure: failure).task
     }
     
     

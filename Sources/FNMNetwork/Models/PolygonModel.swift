@@ -7,13 +7,15 @@
 
 import Foundation
 
+
 public struct PolygonModel: Codable {
-    public let coordinates: [[[Double]]]
+    public let coordinates: [Double]
     public let id, type: String
+    public let radius: Int
 
     enum CodingKeys: String, CodingKey {
         case coordinates
         case id = "_id"
-        case type
+        case type, radius
     }
 }

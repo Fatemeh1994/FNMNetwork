@@ -31,7 +31,7 @@ public enum Router: URLRequestConvertible {
     case getLastLocation(childId: String, deviceId: String)
     case locationHistory(childId: String, deviceId: String, start: String, end: String)
     case deleteFence(childId: String, deviceId: String, Parameters)
-    case addFences(childId: String, deviceId: String, Parameters)
+    case createFence(childId: String, deviceId: String, Parameters)
     
     
         
@@ -65,7 +65,7 @@ public enum Router: URLRequestConvertible {
         case .getLastLocation: return .get
         case .locationHistory: return .get
         case .deleteFence: return .delete
-        case .addFences: return .post
+        case .createFence: return .post
         case .uploadAvatar: return .post
         case .removeAvatar: return .delete
 
@@ -101,7 +101,7 @@ public enum Router: URLRequestConvertible {
         case let .getLastLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/locations/last-one/\(deviceId)"
         case let .locationHistory(childId, deviceId, start, end): return "/api/v1/parent/children/devices/\(childId)/locations/list/\(deviceId)/\(start)/\(end)"
         case let .deleteFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
-        case let .addFences(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .createFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
         case let .uploadAvatar(childId, _): return "/api/v1/parent/children/upload-avatar/\(childId)"
         case let .removeAvatar(childId): return "/api/v1/parent/children/remove-avatar/\(childId)"
             
@@ -170,7 +170,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .deleteFence(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .addFences(_, _, parameters):
+        case let .createFence(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .uploadAvatar(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
