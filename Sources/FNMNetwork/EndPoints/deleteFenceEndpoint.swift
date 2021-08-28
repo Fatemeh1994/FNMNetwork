@@ -8,7 +8,7 @@
 import UIKit
 
 extension WebServiceManager {
-    public func deleteFence(childId: String, deviceId: String, fenceId: String, success: @escaping (DeleteFenceModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func deleteFence(childId: String, deviceId: String, fenceId: String, success: @escaping (MessageModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters = [
             "fence_id": fenceId

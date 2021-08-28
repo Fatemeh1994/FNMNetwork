@@ -19,3 +19,4 @@ public struct PolygonModel: Codable {
         case type, radius
     }
 }
+

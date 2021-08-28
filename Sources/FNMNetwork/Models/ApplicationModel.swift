@@ -2,20 +2,19 @@
 //  File.swift
 //  
 //
-//  Created by fatemeh najafi on 8/25/21.
+//  Created by Fatemeh Najafi on 6/6/1400 AP.
 //
 
 import Foundation
 
 
 public struct ApplicationModel: Codable {
-    public let id: String
-    public let isBlocked: Bool
-    public let application: String
+    public let id, currentVersion, name, pk: String
+    public let icon: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case isBlocked = "is_blocked"
-        case application
+        case currentVersion = "current_version"
+        case name, pk, icon
     }
 }

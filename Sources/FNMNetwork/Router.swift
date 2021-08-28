@@ -32,6 +32,8 @@ public enum Router: URLRequestConvertible {
     case locationHistory(childId: String, deviceId: String, start: String, end: String)
     case deleteFence(childId: String, deviceId: String, Parameters)
     case createFence(childId: String, deviceId: String, Parameters)
+    case updateFence(childId: String, deviceId: String, Parameters)
+    case getGeofencingRules(childId: String, deviceId: String, page: Int, limit: Int)
     
     
         
@@ -68,6 +70,8 @@ public enum Router: URLRequestConvertible {
         case .createFence: return .post
         case .uploadAvatar: return .post
         case .removeAvatar: return .delete
+        case .updateFence: return .put
+        case .getGeofencingRules: return .get
 
         }
     }
@@ -104,10 +108,10 @@ public enum Router: URLRequestConvertible {
         case let .createFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
         case let .uploadAvatar(childId, _): return "/api/v1/parent/children/upload-avatar/\(childId)"
         case let .removeAvatar(childId): return "/api/v1/parent/children/remove-avatar/\(childId)"
-            
+        case let .updateFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
+        case let .getGeofencingRules(childId, deviceId, page, limit): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)/\(page)/\(limit)"
         }
     }
-    
     public func asURLRequest() throws -> URLRequest {
         let url = Self.baseURL.appendingPathComponent(path)
         var request: URLRequest
@@ -158,7 +162,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar :
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules :
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -173,6 +177,8 @@ public enum Router: URLRequestConvertible {
         case let .createFence(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .uploadAvatar(_, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .updateFence(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
