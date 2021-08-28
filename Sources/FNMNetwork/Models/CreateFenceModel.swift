@@ -11,7 +11,7 @@ public struct CreateFenceModel: Codable {
     public let id: String
     public let deleted: Bool
     public let polygon: PolygonModel
-    public let allowedToExit, allowedToEnter: Bool
+//    public let allowedToExit, allowedToEnter: Bool
     public let applications: [ApplicationsRulesModel]
     public let title, deviceID, childID, createfenceModelDescription: String
     public let createdAt, updatedAt: String
@@ -20,8 +20,8 @@ public struct CreateFenceModel: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case deleted, polygon
-        case allowedToExit = "allowed_to_exit"
-        case allowedToEnter = "allowed_to_enter"
+//        case allowedToExit = "allowed_to_exit"
+//        case allowedToEnter = "allowed_to_enter"
         case applications, title
         case deviceID = "device_id"
         case childID = "child_id"

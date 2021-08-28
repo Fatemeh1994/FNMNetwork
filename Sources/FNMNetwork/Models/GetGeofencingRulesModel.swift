@@ -34,4 +34,4 @@ public struct GetGeofencingRulesModel: Codable {
 }
 
 
-typealias GetGeofencingRulesModel = [GetGeofencingRulesModel]
+//typealias GetGeofencingRulesModel = [GetGeofencingRulesModel]

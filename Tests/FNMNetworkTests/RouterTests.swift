@@ -117,4 +117,26 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     
 }
+    func testCreateFenceEndpoint() {
+        let exp = expectation(description: "---Create fence location---")
+        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22" , title: "firestGeo", description: "firestGeoForChild" , coordinates: [ 51.392052999999997, 35.711292999999998 ], radius: 300, applications: [], success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    
 }
+    
+    
+    func json(from object:Any) -> String? {
+        guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+            return nil
+        }
+        return String(data: data, encoding: String.Encoding.utf8)
+    }
+    
+    
+}
+
+
