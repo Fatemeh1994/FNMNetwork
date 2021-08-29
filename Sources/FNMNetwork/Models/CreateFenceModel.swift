@@ -13,7 +13,8 @@ public struct CreateFenceModel: Codable {
     public let polygon: PolygonModel
 //    public let allowedToExit, allowedToEnter: Bool
     public let applications: [ApplicationsRulesModel]
-    public let title, deviceID, childID, createfenceModelDescription: String
+    public let title, deviceID, childID: String
+//    public let description: String
     public let createdAt, updatedAt: String
     public let v: Int
 
@@ -25,11 +26,8 @@ public struct CreateFenceModel: Codable {
         case applications, title
         case deviceID = "device_id"
         case childID = "child_id"
-        case createfenceModelDescription = "description"
+//        case description
         case createdAt, updatedAt
         case v = "__v"
     }
 }
-
-
-

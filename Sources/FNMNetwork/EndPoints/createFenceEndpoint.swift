@@ -9,11 +9,11 @@
 import UIKit
 
 extension WebServiceManager {
-    public func createFence(childId: String, deviceId: String, title: String, description: String, coordinates: [Double], radius: Int, applications: [String: Any], success: @escaping (CreateFenceModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func createFence(childId: String, deviceId: String, title: String, coordinates: [Double], radius: Int, applications: [String: Any], success: @escaping (CreateFenceModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         let parameters: [String: Any] = [
             "title": title,
-            "description": description,
+//            "description": description,
             "coordinates": coordinates,
 //            "is_allowed": isAllowed,
             "radius": radius,
