@@ -27,6 +27,30 @@ public struct GetAppBlockerRulesModel: Codable {
     }
 }
 
+//
+//import Foundation
+//
+//// MARK: - GetAppBlockerRulesModel
+//struct GetAppBlockerRulesModel: Codable {
+//    let rules: [JSONAny]
+//    let apps: [App]
+//    let deleted: Bool
+//    let id, childID, deviceID: String
+//    let v: Int
+//    let createdAt, parentID, updatedAt: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case rules, apps, deleted
+//        case id = "_id"
+//        case childID = "child_id"
+//        case deviceID = "device_id"
+//        case v = "__v"
+//        case createdAt
+//        case parentID = "parent_id"
+//        case updatedAt
+//    }
+//}
+
 
 
 

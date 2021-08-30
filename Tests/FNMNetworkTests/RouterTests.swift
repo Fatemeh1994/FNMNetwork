@@ -118,25 +118,35 @@ final class RouterTests: XCTestCase {
     
 }
     
-    
-//    func testCreateFenceEndpoint() {
-//        let exp = expectation(description: "---Create fence location---")
-//        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications: JSONEncoder.encode(from: applications), success: { response in
-//            exp.fulfill()
-//        }, failure: { serverError, networkError in
-//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-//        })
-//        waitForExpectations(timeout: 8)
-//
-//}
+    func testGetAppBlockerEndpoint() {
+        let exp = expectation(description: "---Get App Blocker location---")
+        _ = WebServiceManager.shared
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+
+}
     
     
-//    func json(from object:Any) -> String? {
-//        guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
-//            return nil
-//        }
-//        return String(data: data, encoding: String.Encoding.utf8)
-//    }
+    func testCreateFenceEndpoint() {
+        let exp = expectation(description: "---Create fence location---")
+        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications:  ApplicationsRulesModel, success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+
+}
+    
+    
+    func json(from object:Any) -> String? {
+        guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+            return nil
+        }
+        return String(data: data, encoding: String.Encoding.utf8)
+    }
 
     
     
@@ -187,36 +197,36 @@ final class RouterTests: XCTestCase {
 
 
 
-extension JSONEncoder {
-    static func encode<T: Encodable>(from data: T) {
-        do {
-            let jsonEncoder = JSONEncoder()
-            jsonEncoder.outputFormatting = .prettyPrinted
-            let json = try jsonEncoder.encode(data)
-            let jsonString = String(data: json, encoding: .utf8)
-            
-            // iOS/Mac: Save to the App's documents directory
-            saveToDocumentDirectory(jsonString)
-            
-            // Mac: Output to file on the user's Desktop
-//            saveToDesktop(jsonString)
-            
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    static private func saveToDocumentDirectory(_ jsonString: String?) {
-        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let fileURL = path.appendingPathComponent("Output.json")
-        
-        do {
-            try jsonString?.write(to: fileURL, atomically: true, encoding: .utf8)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-    }
+//extension JSONEncoder {
+//    static func encode<T: Encodable>(from data: T) {
+//        do {
+//            let jsonEncoder = JSONEncoder()
+//            jsonEncoder.outputFormatting = .prettyPrinted
+//            let json = try jsonEncoder.encode(data)
+//            let jsonString = String(data: json, encoding: .utf8)
+//
+//            // iOS/Mac: Save to the App's documents directory
+//            saveToDocumentDirectory(jsonString)
+//
+//            // Mac: Output to file on the user's Desktop
+////            saveToDesktop(jsonString)
+//
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//    }
+//
+//    static private func saveToDocumentDirectory(_ jsonString: String?) {
+//        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+//        let fileURL = path.appendingPathComponent("Output.json")
+//
+//        do {
+//            try jsonString?.write(to: fileURL, atomically: true, encoding: .utf8)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//
+//    }
     
 //    static private func saveToDesktop(_ jsonString: String?) {
 //        let homeURL = FileManager.default.homeDirectoryForCurrentUser
@@ -229,4 +239,4 @@ extension JSONEncoder {
 //            print(error.localizedDescription)
 //        }
 //    }
-}
+//}

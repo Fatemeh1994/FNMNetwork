@@ -34,6 +34,8 @@ public enum Router: URLRequestConvertible {
     case createFence(childId: String, deviceId: String, Parameters)
     case updateFence(childId: String, deviceId: String, Parameters)
     case getGeofencingRules(childId: String, deviceId: String, page: Int, limit: Int)
+//    case getAppList(childId: String, deviceId: String, )
+    case changeStatus(childId: String, deviceId: String, Parameters)
     
     
         
@@ -72,7 +74,7 @@ public enum Router: URLRequestConvertible {
         case .removeAvatar: return .delete
         case .updateFence: return .put
         case .getGeofencingRules: return .get
-
+        case .changeStatus: return .post
         }
     }
     
@@ -110,6 +112,7 @@ public enum Router: URLRequestConvertible {
         case let .removeAvatar(childId): return "/api/v1/parent/children/remove-avatar/\(childId)"
         case let .updateFence(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)"
         case let .getGeofencingRules(childId, deviceId, page, limit): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)/\(page)/\(limit)"
+        case let .changeStatus(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules-activation/\(deviceId)"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -179,6 +182,8 @@ public enum Router: URLRequestConvertible {
         case let .uploadAvatar(_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateFence(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .changeStatus(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
