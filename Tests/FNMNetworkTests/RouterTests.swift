@@ -6,7 +6,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "Mmad@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "Mamad@gmail.com", password: "F12345678", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -120,25 +120,24 @@ final class RouterTests: XCTestCase {
     
     func testGetAppBlockerEndpoint() {
         let exp = expectation(description: "---Get App Blocker location---")
-        _ = WebServiceManager.shared
+        _ = WebServiceManager.shared.getAppBlockerRules(childId: "", deviceId: "", success: { response in
+            
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
         })
         waitForExpectations(timeout: 8)
-
-}
+    }
     
     
     func testCreateFenceEndpoint() {
         let exp = expectation(description: "---Create fence location---")
-        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications:  ApplicationsRulesModel, success: { response in
+        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications: [:], success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
         })
         waitForExpectations(timeout: 8)
-
-}
+    }
     
     
     func json(from object:Any) -> String? {
@@ -147,9 +146,6 @@ final class RouterTests: XCTestCase {
         }
         return String(data: data, encoding: String.Encoding.utf8)
     }
-
-    
-    
     
     func testDeleteFenceEndpoint() {
         let exp = expectation(description: "---Delete fence location---")
@@ -182,61 +178,3 @@ final class RouterTests: XCTestCase {
     }
     
 }
-
-
-//extension CollectionType where Generator.Element == [String:AnyObject] {
-//    func toJSONString(options: NSJSONWritingOptions = .PrettyPrinted) -> String {
-//        if let arr = self as? [String:AnyObject],
-//            let dat = try? NSJSONSerialization.dataWithJSONObject(arr, options: options),
-//            let str = String(data: dat, encoding: NSUTF8StringEncoding) {
-//            return str
-//        }
-//        return "[]"
-//    }
-//}
-
-
-
-//extension JSONEncoder {
-//    static func encode<T: Encodable>(from data: T) {
-//        do {
-//            let jsonEncoder = JSONEncoder()
-//            jsonEncoder.outputFormatting = .prettyPrinted
-//            let json = try jsonEncoder.encode(data)
-//            let jsonString = String(data: json, encoding: .utf8)
-//
-//            // iOS/Mac: Save to the App's documents directory
-//            saveToDocumentDirectory(jsonString)
-//
-//            // Mac: Output to file on the user's Desktop
-////            saveToDesktop(jsonString)
-//
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
-//
-//    static private func saveToDocumentDirectory(_ jsonString: String?) {
-//        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-//        let fileURL = path.appendingPathComponent("Output.json")
-//
-//        do {
-//            try jsonString?.write(to: fileURL, atomically: true, encoding: .utf8)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//
-//    }
-    
-//    static private func saveToDesktop(_ jsonString: String?) {
-//        let homeURL = FileManager.default.homeDirectoryForCurrentUser
-//        let desktopURL = homeURL.appendingPathComponent("Desktop")
-//        let fileURL = desktopURL.appendingPathComponent("Output.json")
-//
-//        do {
-//            try jsonString?.write(to: fileURL, atomically: true, encoding: .utf8)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
-//}
