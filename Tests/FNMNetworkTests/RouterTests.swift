@@ -3,7 +3,6 @@ import XCTest
 
 final class RouterTests: XCTestCase {
     
-    
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
         _ = WebServiceManager.shared.signIn(email: "Mamad@gmail.com", password: "F12345678", success: { response in
@@ -14,6 +13,7 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
+    
     func testSignUpEndpoint() {
         let exp = expectation(description: "---User sign up---")
         _ = WebServiceManager.shared.signUp(email: "f.najafimoghadam@gmail.com", password: "F12345678", success: { response in
@@ -34,6 +34,7 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
+    
     func testCreateDeviceEndpoint() {
         let exp = expectation(description: "---Create Device---")
         _ = WebServiceManager.shared.createDevice(childId: "60d716731074ec7d914fa90b", platform: "android", success: { response in
@@ -44,6 +45,7 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
+    
     func testCheckPinEndpoint() {
         let exp = expectation(description: "---check pin code---")
         _ = WebServiceManager.shared.checkPinCode(pinCode: "123456", success: { response in
@@ -85,9 +87,8 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 4)
     }
 
-    
     func testGetDefaultAvatarEndpoint() {
-        let exp = expectation(description: "---Get List Avaters---")
+        let exp = expectation(description: "---Get List Avatars---")
         _ = WebServiceManager.shared.getDefaultAvatar(success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -120,8 +121,8 @@ final class RouterTests: XCTestCase {
     
     func testGetAppBlockerEndpoint() {
         let exp = expectation(description: "---Get App Blocker location---")
-        _ = WebServiceManager.shared.getAppBlockerRules(childId: "", deviceId: "", success: { response in
-            
+        _ = WebServiceManager.shared.getAppBlockerRules(childId: "610e9e3014eb0e5f906356f2", deviceId: "612f6feb23acae751cc8f58c", success: { response in
+            exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
         })
@@ -139,14 +140,6 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     }
     
-    
-    func json(from object:Any) -> String? {
-        guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
-            return nil
-        }
-        return String(data: data, encoding: String.Encoding.utf8)
-    }
-    
     func testDeleteFenceEndpoint() {
         let exp = expectation(description: "---Delete fence location---")
         _ = WebServiceManager.shared.deleteFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", fenceId: "", success: { response in
@@ -155,8 +148,7 @@ final class RouterTests: XCTestCase {
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
         })
         waitForExpectations(timeout: 8)
-    
-}
+    }
 //    func testDeleteFenceEndpoint() {
 //        let exp = expectation(description: "---Update fence location---")
 //        _ = WebServiceManager.shared.updateFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications: [String : Any], fenceId: "", success: { response in
@@ -178,8 +170,6 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     }
     
-    
-    
     func testGetAppListEndpoint() {
         let exp = expectation(description: "---get App List---")
         _ = WebServiceManager.shared.getAppList(childId: "610e9e3014eb0e5f906356f2", deviceId: "612f6feb23acae751cc8f58c", page: 0, limitations: 100, success: { response in
@@ -189,5 +179,4 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
-    
 }

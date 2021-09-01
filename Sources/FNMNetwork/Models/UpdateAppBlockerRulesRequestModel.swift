@@ -15,9 +15,10 @@ public struct UpdateAppBlockerRulesRequestModel: Codable {
 
 // MARK: - Day
 public struct Day: Codable {
-    let day, startTime, endTime, duration: String
+    let id, day, startTime, endTime, duration: String
 
     enum CodingKeys: String, CodingKey {
+        case id = "_id"
         case day
         case startTime = "start_time"
         case endTime = "end_time"

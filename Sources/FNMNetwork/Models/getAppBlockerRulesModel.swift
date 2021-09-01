@@ -8,21 +8,49 @@
 import Foundation
 
 public struct GetAppBlockerRulesModel: Codable {
-    public let rules: [RulesModel]
-    public let apps: [ApplicationModel]
+    public let blackList: [AppList]
+    public let whiteList: [AppList]
+    
+    enum CodingKeys: String, CodingKey {
+        case blackList = "black_list"
+        case whiteList = "white_list"
+    }
+}
+
+// MARK: - BlackList
+public struct AppList: Codable {
     public let deleted: Bool
-    public let id, childID, deviceID: String
+    public let id: String
+    public let ruleType: RuleType
+    public let days: [Day]
+    public let deviceID: String
+    public let childID: String
+    public let parentID: String
+    public let application: ApplicationModel
+    public let createdAt, updatedAt: String
     public let v: Int
-    public let createdAt, parentID, updatedAt: String
+//    let zones: [JSONAny]
 
     enum CodingKeys: String, CodingKey {
-        case rules, apps, deleted
+        case deleted
         case id = "_id"
-        case childID = "child_id"
+        case ruleType = "rule_type"
+        case days
         case deviceID = "device_id"
-        case v = "__v"
-        case createdAt
+        case childID = "child_id"
         case parentID = "parent_id"
-        case updatedAt
+        case application, createdAt, updatedAt
+        case v = "__v"
+//        case zones
     }
+}
+
+enum Status: String, Codable {
+    case installed = "INSTALLED"
+    case uninstalled = "UNINSTALLED"
+}
+
+public enum RuleType: String, Codable {
+    case blackList = "BLACK_LIST"
+    case whiteList = "WHITE_LIST"
 }
