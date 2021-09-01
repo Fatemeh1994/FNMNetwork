@@ -9,7 +9,7 @@ import Foundation
 
 public struct GetAppBlockerRulesModel: Codable {
     public let rules: [RulesModel]
-    public let apps: [Application]
+    public let apps: [ApplicationModel]
     public let deleted: Bool
     public let id, childID, deviceID: String
     public let v: Int
