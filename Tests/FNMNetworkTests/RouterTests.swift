@@ -177,4 +177,15 @@ final class RouterTests: XCTestCase {
         })
     }
     
+    
+    
+    func testGetAppListEndpoint() {
+        let exp = expectation(description: "---get App List---")
+        _ = WebServiceManager.shared.getAppList(childId: "610e9e3014eb0e5f906356f2", deviceId: "610e9e3014eb0e5f906356f2", page: 2, limitations: 1, success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+    }
+    
 }
