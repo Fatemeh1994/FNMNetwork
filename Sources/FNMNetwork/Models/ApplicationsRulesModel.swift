@@ -20,11 +20,11 @@ public struct ApplicationsRulesModel<Application: Codable>: Codable {
 }
 
 public struct RulesApplication: Application {
-    var id: String
-    var currentVersion: String
-    var name: String
-    var pk: String
-    var icon: String
+    public var id: String
+    public var currentVersion: String
+    public var name: String
+    public var pk: String
+    public var icon: String
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"

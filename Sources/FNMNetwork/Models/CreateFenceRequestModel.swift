@@ -7,7 +7,38 @@
 
 import Foundation
 
-public struct CreateFenceRequestModel: Codable {
+public protocol FenceRequestModel: Codable {
+    var title: String { get }
+    var coordinates: [Double] { get }
+    var radius: Int { get }
+    var applications: [CreateFenceApplicationModel] { get }
+}
+
+public struct UpdateFenceRequestModel: FenceRequestModel {
+    
+    public let id: String
+    public let title: String
+    public let coordinates: [Double]
+    public let radius: Int
+    public let applications: [CreateFenceApplicationModel]
+    
+    public init(id: String, title: String, coordinates: [Double], radius: Int, applications: [CreateFenceApplicationModel]) {
+        self.id = id
+        self.title = title
+        self.coordinates = coordinates
+        self.radius = radius
+        self.applications = applications
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "fence_id"
+        case title
+        case coordinates, radius
+        case applications
+    }
+}
+
+public struct CreateFenceRequestModel: FenceRequestModel {
     
     public let title: String
     public let coordinates: [Double]
