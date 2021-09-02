@@ -9,7 +9,7 @@
 import UIKit
 
 extension WebServiceManager {
-    public func createFence(childId: String, deviceId: String, parameter: CreateFenceRequestModel, success: @escaping (CreateFenceModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func createFence(childId: String, deviceId: String, parameter: CreateFenceRequestModel, success: @escaping (CreateFenceModel<[ApplicationsRulesModel<String>]>) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         
         let jsonData = try! JSONEncoder().encode(parameter)

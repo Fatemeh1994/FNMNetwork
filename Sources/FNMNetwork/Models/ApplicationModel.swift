@@ -7,11 +7,20 @@
 
 import Foundation
 
-public struct ApplicationModel: Codable {
+protocol Application: Codable {
+    var id: String { get }
+    var currentVersion: String { get }
+    var name: String { get }
+    var pk: String { get }
+    var icon: String { get }
+}
+
+public struct ApplicationModel: Application {
     public let deleted: Bool
     public let id, appID, childID, deviceID: String
     public let v: Int
-    public let createdAt, currentVersion, lastUpdatedTime, name: String
+    public let currentVersion: String
+    public let createdAt, lastUpdatedTime, name: String
     public let pk, status, updatedAt: String
     public let icon: String
 

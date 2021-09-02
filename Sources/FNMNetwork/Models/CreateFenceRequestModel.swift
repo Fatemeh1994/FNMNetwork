@@ -28,9 +28,9 @@ public struct CreateFenceRequestModel: Codable {
     }
 }
 
-public struct CreateFenceApplicationModel: ApplicationRules {
+public struct CreateFenceApplicationModel: Codable {
     
-    public var isBlocked: Bool
+    public var isBlocked: Bool?
     public var application: String
     
     public init(isBlocked: Bool, application: String) {

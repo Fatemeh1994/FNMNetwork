@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CreateFenceModel.swift
 //  
 //
 //  Created by Fatemeh Najafi on 3/29/1400 AP.
@@ -7,26 +7,22 @@
 
 import Foundation
 
-public struct CreateFenceModel: Codable {
+public struct CreateFenceModel<Application: Codable>: Codable {
+    
     public let id: String
     public let deleted: Bool
     public let polygon: PolygonModel
-//    public let allowedToExit, allowedToEnter: Bool
-    public let applications: [ApplicationsRulesModel]
+    public let applications: Application
     public let title, deviceID, childID: String
-//    public let description: String
     public let createdAt, updatedAt: String
     public let v: Int
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case deleted, polygon
-//        case allowedToExit = "allowed_to_exit"
-//        case allowedToEnter = "allowed_to_enter"
         case applications, title
         case deviceID = "device_id"
         case childID = "child_id"
-//        case description
         case createdAt, updatedAt
         case v = "__v"
     }

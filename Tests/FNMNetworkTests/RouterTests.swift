@@ -175,7 +175,7 @@ final class RouterTests: XCTestCase {
     
     func testGetFenceEndpoint() {
         let exp = expectation(description: "---get fence location---")
-        _ = WebServiceManager.shared.getGeofencingRules(childId: "610e9e3014eb0e5f906356f2", deviceId: "612f6feb23acae751cc8f58c", page: 1, limit: 1, success: { response in
+        _ = WebServiceManager.shared.getGeofencingRules(childId: "610e9e3014eb0e5f906356f2", deviceId: "612f6feb23acae751cc8f58c", page: 0, limit: 100, success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
