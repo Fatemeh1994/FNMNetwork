@@ -8,10 +8,18 @@
 import Foundation
 
 public struct CreateFenceRequestModel: Codable {
+    
     public let title: String
     public let coordinates: [Double]
     public let radius: Int
     public let applications: [CreateFenceApplicationModel]
+    
+    public init(title: String, coordinates: [Double], radius: Int, applications: [CreateFenceApplicationModel]) {
+        self.title = title
+        self.coordinates = coordinates
+        self.radius = radius
+        self.applications = applications
+    }
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -21,8 +29,14 @@ public struct CreateFenceRequestModel: Codable {
 }
 
 public struct CreateFenceApplicationModel: ApplicationRules {
+    
     public var isBlocked: Bool
     public var application: String
+    
+    public init(isBlocked: Bool, application: String) {
+        self.isBlocked = isBlocked
+        self.application = application
+    }
     
     enum CodingKeys: String, CodingKey {
         case isBlocked = "is_blocked"
