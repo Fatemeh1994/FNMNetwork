@@ -30,6 +30,8 @@ public struct AppList: Codable {
     public let createdAt, updatedAt: String
     public let v: Int
 //    let zones: [JSONAny]
+    
+    public var isBlocked: Bool { ruleType == .blackList }
 
     enum CodingKeys: String, CodingKey {
         case deleted
