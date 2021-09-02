@@ -7,8 +7,12 @@
 
 import Foundation
 
+public protocol ApplicationRules: Codable {
+    var isBlocked: Bool { get }
+    var application: String { get }
+}
 
-public struct ApplicationsRulesModel: Codable {
+public struct ApplicationsRulesModel: ApplicationRules {
     public let id: String
     public let isBlocked: Bool
     public let application: String

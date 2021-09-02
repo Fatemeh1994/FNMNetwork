@@ -132,7 +132,20 @@ final class RouterTests: XCTestCase {
     
     func testCreateFenceEndpoint() {
         let exp = expectation(description: "---Create fence location---")
-        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications: [:], success: { response in
+        
+        let createFenceRequestModel = CreateFenceRequestModel(
+            title: "Fatemeh",
+            coordinates: [35.713961,51.389978],
+            radius: 100,
+            applications: [
+                CreateFenceApplicationModel(
+                    isBlocked: true,
+                    application: "612f700ff15e5b9298ed0481"
+                )
+            ]
+        )
+        
+        _ = WebServiceManager.shared.createFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "612f6feb23acae751cc8f58c", parameter: createFenceRequestModel, success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
