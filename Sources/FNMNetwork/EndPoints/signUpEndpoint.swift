@@ -8,15 +8,16 @@
 import UIKit
 
 extension WebServiceManager {
-    public func signUp(email: String, password: String, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
+    public func signUp(email: String, password: String, fcmToken: String?, success: @escaping (SignUpModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {
         
         guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
         
-        let parameters = [
+        let parameters: [String: Any] = [
             "email": email,
             "password": password,
             "agent_id": agentId,
-            "platform": "ios"
+            "platform": "ios",
+            "token": fcmToken
         ]
         
         return resumeDataTask(with: .signUp(parameters), success: success, failure: failure).task

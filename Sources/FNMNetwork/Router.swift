@@ -36,6 +36,7 @@ public enum Router: URLRequestConvertible {
     case getGeofencingRules(childId: String, deviceId: String, page: Int, limit: Int)
     case getAppList(childId: String, deviceId: String, page: Int, limitations: Int)
     case changeStatus(childId: String, deviceId: String, Parameters)
+    case activateLiveLocation(childId: String, deviceId: String)
     
     
         
@@ -76,6 +77,7 @@ public enum Router: URLRequestConvertible {
         case .getGeofencingRules: return .get
         case .changeStatus: return .post
         case .getAppList: return .get
+        case .activateLiveLocation: return .get
         }
     }
     
@@ -115,6 +117,7 @@ public enum Router: URLRequestConvertible {
         case let .getGeofencingRules(childId, deviceId, page, limit): return "/api/v1/parent/children/devices/\(childId)/rules/geofencing/\(deviceId)/\(page)/\(limit)"
         case let .changeStatus(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules-activation/\(deviceId)"
         case let .getAppList(childId, deviceId, page, limitations): return "/api/v1/parent/children/devices/\(childId)/get-apps/\(deviceId)/\(page)/\(limitations)"
+        case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -167,7 +170,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList :
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation :
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
