@@ -162,16 +162,19 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
-//    func testDeleteFenceEndpoint() {
-//        let exp = expectation(description: "---Update fence location---")
-//        _ = WebServiceManager.shared.updateFence(childId: "610e9e3014eb0e5f906356f2", deviceId: "610f894a2236b45f96d62d22", title: "title", coordinates: [51.392052999999997, 35.711292999999998], radius: 300, applications: [String : Any], fenceId: "", success: { response in
-//            exp.fulfill()
-//        }, failure: { serverError, networkError in
-//            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-//        })
-//        waitForExpectations(timeout: 8)
-//
-//}
+
+    
+    func testGetAllChilrenEndpoint() {
+        let exp = expectation(description: "---get All Children---")
+        _ = WebServiceManager.shared.getAllChilren(page: 0, limit: 100, success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+
+    
     
     func testGetFenceEndpoint() {
         let exp = expectation(description: "---get fence location---")

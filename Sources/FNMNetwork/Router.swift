@@ -37,6 +37,7 @@ public enum Router: URLRequestConvertible {
     case getAppList(childId: String, deviceId: String, page: Int, limitations: Int)
     case changeStatus(childId: String, deviceId: String, Parameters)
     case activateLiveLocation(childId: String, deviceId: String)
+    case getAllChildren(page: Int,limit: Int)
     
     
         
@@ -78,6 +79,7 @@ public enum Router: URLRequestConvertible {
         case .changeStatus: return .post
         case .getAppList: return .get
         case .activateLiveLocation: return .get
+        case .getAllChildren: return .get
         }
     }
     
@@ -118,6 +120,7 @@ public enum Router: URLRequestConvertible {
         case let .changeStatus(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules-activation/\(deviceId)"
         case let .getAppList(childId, deviceId, page, limitations): return "/api/v1/parent/children/devices/\(childId)/get-apps/\(deviceId)/\(page)/\(limitations)"
         case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
+        case let .getAllChildren(page, limit): return "/api/v1/parent/children/list/\(page)/\(limit)"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -170,7 +173,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation :
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation, .getAllChildren :
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
