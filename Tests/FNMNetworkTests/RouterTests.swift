@@ -5,7 +5,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "Mamad@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "Mamad@gmail.com", password: "F12345678", fcmToken: "bbbb", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -16,7 +16,7 @@ final class RouterTests: XCTestCase {
     
     func testSignUpEndpoint() {
         let exp = expectation(description: "---User sign up---")
-        _ = WebServiceManager.shared.signUp(email: "f.najafimoghadam@gmail.com", password: "F12345678", success: { response in
+        _ = WebServiceManager.shared.signUp(email: "f.najafimoghadam@gmail.com", password: "F12345678", fcmToken: "BBB", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
