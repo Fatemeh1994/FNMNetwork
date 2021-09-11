@@ -162,18 +162,6 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
-
-    
-    func testGetAllChilrenEndpoint() {
-        let exp = expectation(description: "---get All Children---")
-        _ = WebServiceManager.shared.getAllChilren(page: 0, limit: 100, success: { response in
-            exp.fulfill()
-        }, failure: { serverError, networkError in
-            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
-        })
-        waitForExpectations(timeout: 8)
-    }
-
     
     
     func testGetFenceEndpoint() {
