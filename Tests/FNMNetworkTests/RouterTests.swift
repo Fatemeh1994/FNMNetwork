@@ -183,4 +183,16 @@ final class RouterTests: XCTestCase {
         })
         waitForExpectations(timeout: 8)
     }
+    
+    func testUpdateFcm(){
+        let exp = expectation(description: "---update fcm token---")
+        _ = WebServiceManager.shared.updateFcm(token: "", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    
 }

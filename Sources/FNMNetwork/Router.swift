@@ -37,6 +37,7 @@ public enum Router: URLRequestConvertible {
     case getAppList(childId: String, deviceId: String, page: Int, limitations: Int)
     case changeStatus(childId: String, deviceId: String, Parameters)
     case activateLiveLocation(childId: String, deviceId: String)
+    case updateFcm(Parameters)
     
     
         
@@ -78,6 +79,8 @@ public enum Router: URLRequestConvertible {
         case .changeStatus: return .post
         case .getAppList: return .get
         case .activateLiveLocation: return .get
+        case .updateFcm: return .post
+            
         }
     }
     
@@ -118,6 +121,7 @@ public enum Router: URLRequestConvertible {
         case let .changeStatus(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules-activation/\(deviceId)"
         case let .getAppList(childId, deviceId, page, limitations): return "/api/v1/parent/children/devices/\(childId)/get-apps/\(deviceId)/\(page)/\(limitations)"
         case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
+        case .updateFcm(_): return "/api/v1/parent/devices/fcm"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -189,6 +193,8 @@ public enum Router: URLRequestConvertible {
         case let .updateFence(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .changeStatus(_, _, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .updateFcm(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
