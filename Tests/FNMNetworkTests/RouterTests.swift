@@ -195,4 +195,14 @@ final class RouterTests: XCTestCase {
     }
     
     
+    func testSignOutUser(){
+        let exp = expectation(description: "---sign Out User---")
+        _ = WebServiceManager.shared.signOutUser(success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
 }

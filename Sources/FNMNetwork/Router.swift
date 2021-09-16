@@ -38,6 +38,7 @@ public enum Router: URLRequestConvertible {
     case changeStatus(childId: String, deviceId: String, Parameters)
     case activateLiveLocation(childId: String, deviceId: String)
     case updateFcm(Parameters)
+    case signOutUser
     
     
         
@@ -80,6 +81,7 @@ public enum Router: URLRequestConvertible {
         case .getAppList: return .get
         case .activateLiveLocation: return .get
         case .updateFcm: return .post
+        case .signOutUser: return .post
             
         }
     }
@@ -122,6 +124,7 @@ public enum Router: URLRequestConvertible {
         case let .getAppList(childId, deviceId, page, limitations): return "/api/v1/parent/children/devices/\(childId)/get-apps/\(deviceId)/\(page)/\(limitations)"
         case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
         case .updateFcm(_): return "/api/v1/parent/devices/fcm"
+        case .signOutUser: return "/api/v1/auth/parent/sign-out"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -158,7 +161,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signInAndSignUpWithGoogle(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .childrenList, .parentMe, .removeAvatar, .generatePairCode:
+        case .childrenList, .parentMe, .removeAvatar, .generatePairCode, .signOutUser:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
