@@ -39,6 +39,10 @@ public enum Router: URLRequestConvertible {
     case activateLiveLocation(childId: String, deviceId: String)
     case updateFcm(Parameters)
     case signOutUser
+    case updateUser(Parameters)
+    case FAQList
+    case removeAvatarParent
+    case uploadAvatarParent(Parameters)
     
     
         
@@ -82,6 +86,11 @@ public enum Router: URLRequestConvertible {
         case .activateLiveLocation: return .get
         case .updateFcm: return .post
         case .signOutUser: return .post
+        case .updateUser: return .put
+        case .FAQList: return .get
+        case .removeAvatarParent: return .delete
+        case .uploadAvatarParent: return .post
+            
             
         }
     }
@@ -125,6 +134,10 @@ public enum Router: URLRequestConvertible {
         case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
         case .updateFcm(_): return "/api/v1/parent/devices/fcm"
         case .signOutUser: return "/api/v1/auth/parent/sign-out"
+        case .updateUser: return "/api/v1/parent/me"
+        case .FAQList: return "/api/v1/parent/faq/list"
+        case .removeAvatarParent: return "/api/v1/parent/children/remove-avatar"
+        case .uploadAvatarParent(_): return "/api/v1/parent/parent/upload-avatar"
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -161,7 +174,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signInAndSignUpWithGoogle(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .childrenList, .parentMe, .removeAvatar, .generatePairCode, .signOutUser:
+        case .childrenList, .parentMe, .removeAvatar, .generatePairCode, .signOutUser, .updateUser, .FAQList, .removeAvatarParent:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -198,6 +211,8 @@ public enum Router: URLRequestConvertible {
         case let .changeStatus(_, _, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateFcm(parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .uploadAvatarParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         }
         return request
