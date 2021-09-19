@@ -45,6 +45,11 @@ public enum Router: URLRequestConvertible {
     case checkPassword(Parameters)
     case getAllDevices(page: Int, limit: Int)
     case getOneDevice(deviceId: String)
+    case updateChild(childId: String, Parameters)
+    case removeChildWithDevices(childId: String)
+    case getChild(childId: String)
+    case getAllDevicesChildren(childId: String, page: Int, limit: String)
+    case deleteDevice(childId: String, deviceId:String)
     
     
         
@@ -94,6 +99,11 @@ public enum Router: URLRequestConvertible {
         case .checkPassword: return .post
         case .getAllDevices: return .get
         case .getOneDevice: return .get
+        case .updateChild: return .put
+        case .removeChildWithDevices: return .delete
+        case .getChild: return .get
+        case .getAllDevicesChildren: return .get
+        case .deleteDevice: return .delete
             
             
             
@@ -145,6 +155,11 @@ public enum Router: URLRequestConvertible {
         case .checkPassword: return "/api/v1/parent/check-password"
         case let .getAllDevices(page, limit): return "/api/v1/parent/devices/list/\(page)/\(limit)"
         case let .getOneDevice(deviceId): return "/api/v1/parent/devices/get-one/\(deviceId)"
+        case let .updateChild(childId, _): return "/api/v1/parent/children/update-one/\(childId)"
+        case let .removeChildWithDevices(childId): return "/api/v1/parent/children/delete-one/\(childId)"
+        case let .getChild(childId): return "/api/v1/parent/children/get-one/\(childId)"
+        case let .getAllDevicesChildren(childId, page, limit): return "/api/v1/parent/children/devices/\(childId)/list/\(page)/\(limit)"
+        case let .deleteDevice(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/delete-one/\(deviceId)"
             
         }
     }
@@ -198,7 +213,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation, .getAllDevices, .getOneDevice:
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation, .getAllDevices, .getOneDevice, .removeChildWithDevices, .getChild, .getAllDevicesChildren, .deleteDevice:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -224,7 +239,8 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .checkPassword(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-            
+        case let .updateChild(_, parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
             
         }
         return request

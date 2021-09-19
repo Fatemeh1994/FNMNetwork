@@ -5,7 +5,7 @@
 //  Created by Reza Khonsari on 5/10/21.
 //
 
-import Foundation
+import UIKit
 
 extension WebServiceManager {
     public func setDefaultChild(childId: String, deviceId: String, success: @escaping (MessageModel) -> (), failure: @escaping (ErrorModel?, Error?) -> ()) -> URLSessionTask? {

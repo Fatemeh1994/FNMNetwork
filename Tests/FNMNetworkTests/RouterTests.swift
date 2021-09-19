@@ -184,7 +184,7 @@ final class RouterTests: XCTestCase {
         waitForExpectations(timeout: 8)
     }
     
-    func testUpdateFcm(){
+    func testUpdateFcmEndpoint(){
         let exp = expectation(description: "---update fcm token---")
         _ = WebServiceManager.shared.updateFcm(token: "", success: { response in
             exp.fulfill()
@@ -195,9 +195,40 @@ final class RouterTests: XCTestCase {
     }
     
     
-    func testSignOutUser(){
+    func testSignOutUserEndpoint(){
         let exp = expectation(description: "---sign Out User---")
         _ = WebServiceManager.shared.signOutUser(success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    
+    func testCheckPasswordEndpoint(){
+        let exp = expectation(description: "---check password---")
+        _ = WebServiceManager.shared.checkPassword(password: "F12345678", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    func testGetAllDevicesEndpoint(){
+        let exp = expectation(description: "---get all devices---")
+        _ = WebServiceManager.shared.getAllDevices(page: 1, limit: 1, success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    func testGetOneDeviceEndpoint(){
+        let exp = expectation(description: "---get one device---")
+        _ = WebServiceManager.shared.getOneDevice(deviceId: "612f6feb23acae751cc8f58c", success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")

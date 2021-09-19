@@ -5,7 +5,7 @@
 //  Created by Fatemeh Najafi on 2/15/1400 AP.
 //
 
-import Foundation
+
 import UIKit
 
 extension WebServiceManager {
