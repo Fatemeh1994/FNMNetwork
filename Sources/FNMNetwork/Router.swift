@@ -39,10 +39,12 @@ public enum Router: URLRequestConvertible {
     case activateLiveLocation(childId: String, deviceId: String)
     case updateFcm(Parameters)
     case signOutUser
-    case updateUser(Parameters)
     case FAQList
     case removeAvatarParent
     case uploadAvatarParent(Parameters)
+    case checkPassword(Parameters)
+    case getAllDevices(page: Int, limit: Int)
+    case getOneDevice(deviceId: String)
     
     
         
@@ -86,10 +88,13 @@ public enum Router: URLRequestConvertible {
         case .activateLiveLocation: return .get
         case .updateFcm: return .post
         case .signOutUser: return .post
-        case .updateUser: return .put
         case .FAQList: return .get
         case .removeAvatarParent: return .delete
         case .uploadAvatarParent: return .post
+        case .checkPassword: return .post
+        case .getAllDevices: return .get
+        case .getOneDevice: return .get
+            
             
             
         }
@@ -114,7 +119,7 @@ public enum Router: URLRequestConvertible {
         case .verifyResetPinCode: return "/api/v1/parent/verify-reset/pin-code"
         case .checkPinCode: return "/api/v1/parent/pin-code"
         case .parentMe: return "/api/v1/parent/me"
-        case .updateParent: return "/api/v1/parent/me"
+        case .updateParent: return "/api/v1/parent/update-me"
         case let .getAppBlockerRules(childId,deviceId): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
         case let .updateAppBlockerRules(childId,deviceId,_): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules/\(deviceId)"
         case let .updateExceptions(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/web-content/\(deviceId)/exceptions"
@@ -132,12 +137,15 @@ public enum Router: URLRequestConvertible {
         case let .changeStatus(childId, deviceId, _): return "/api/v1/parent/children/devices/\(childId)/rules/app-rules-activation/\(deviceId)"
         case let .getAppList(childId, deviceId, page, limitations): return "/api/v1/parent/children/devices/\(childId)/get-apps/\(deviceId)/\(page)/\(limitations)"
         case let .activateLiveLocation(childId, deviceId): return "/api/v1/parent/children/devices/\(childId)/live-location/\(deviceId)"
-        case .updateFcm(_): return "/api/v1/parent/devices/fcm"
+        case .updateFcm: return "/api/v1/parent/devices/fcm"
         case .signOutUser: return "/api/v1/auth/parent/sign-out"
-        case .updateUser: return "/api/v1/parent/me"
         case .FAQList: return "/api/v1/parent/faq/list"
         case .removeAvatarParent: return "/api/v1/parent/children/remove-avatar"
-        case .uploadAvatarParent(_): return "/api/v1/parent/parent/upload-avatar"
+        case .uploadAvatarParent: return "/api/v1/parent/parent/upload-avatar"
+        case .checkPassword: return "/api/v1/parent/check-password"
+        case let .getAllDevices(page, limit): return "/api/v1/parent/devices/list/\(page)/\(limit)"
+        case let .getOneDevice(deviceId): return "/api/v1/parent/devices/get-one/\(deviceId)"
+            
         }
     }
     public func asURLRequest() throws -> URLRequest {
@@ -174,7 +182,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .signInAndSignUpWithGoogle(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .childrenList, .parentMe, .removeAvatar, .generatePairCode, .signOutUser, .updateUser, .FAQList, .removeAvatarParent:
+        case .childrenList, .parentMe, .removeAvatar, .generatePairCode, .signOutUser, .FAQList, .removeAvatarParent:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .setDefaultChild(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -190,7 +198,7 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation :
+        case .getAppBlockerRules, .getWebContentRule, .getLastLocation, .locationHistory, .getDefaultAvatar, .getGeofencingRules, .getAppList, .activateLiveLocation, .getAllDevices, .getOneDevice:
             request = try URLEncoding.default.encode(request, with: nil)
         case let .updateAppBlockerRules(_,_, parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
@@ -214,6 +222,10 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .uploadAvatarParent(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
+        case let .checkPassword(parameters):
+            request = try JSONEncoding.default.encode(request, with: parameters)
+            
+            
         }
         return request
     }
