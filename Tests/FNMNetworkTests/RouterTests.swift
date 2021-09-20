@@ -5,7 +5,7 @@ final class RouterTests: XCTestCase {
     
     func testSignInEndpoint() {
         let exp = expectation(description: "---User sign in---")
-        _ = WebServiceManager.shared.signIn(email: "Mamad@gmail.com", password: "F12345678", fcmToken: "bbbb", success: { response in
+        _ = WebServiceManager.shared.signIn(email: "F.ma@gmail.com", password: "F12345678", fcmToken: "bbbb", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -16,7 +16,7 @@ final class RouterTests: XCTestCase {
     
     func testSignUpEndpoint() {
         let exp = expectation(description: "---User sign up---")
-        _ = WebServiceManager.shared.signUp(email: "f.najafimoghadam@gmail.com", password: "F12345678", fcmToken: "BBB", success: { response in
+        _ = WebServiceManager.shared.signUp(email: "F.ma@gmail.com", password: "F12345678", fcmToken: "BBB", success: { response in
             NetworkStorage.shared.token = response.token
             exp.fulfill()
         }, failure: { serverError, networkError in
@@ -228,7 +228,49 @@ final class RouterTests: XCTestCase {
     
     func testGetOneDeviceEndpoint(){
         let exp = expectation(description: "---get one device---")
-        _ = WebServiceManager.shared.getOneDevice(deviceId: "612f6feb23acae751cc8f58c", success: { response in
+        _ = WebServiceManager.shared.getOneDevice(deviceId: "6148286227c0a042624aea6e", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    
+    func testGetAllDevicesChildrenEndpoint(){
+        let exp = expectation(description: "---get All devices children ---")
+        _ = WebServiceManager.shared.getAllDevicesChildren(childId: "6137431e1198ab3d9d348068", page: 1, limit: 1, success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    
+    func testUpdateParentEndpoint(){
+        let exp = expectation(description: "---update Parent ---")
+        _ = WebServiceManager.shared.updateParent(pinCode: "123456", address: "aa", mobile: "12", avatar: "11", password: "F12345678", fullName: "fatemeh", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    func testDeleteDeviceEndpoint(){
+        let exp = expectation(description: "---delete device ---")
+        _ = WebServiceManager.shared.deleteDevice(childId: "6137431e1198ab3d9d348068", deviceId: "6148286227c0a042624aea6e", success: { response in
+            exp.fulfill()
+        }, failure: { serverError, networkError in
+            XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")
+        })
+        waitForExpectations(timeout: 8)
+    }
+    
+    func testRemoveChildWithDevicesEndpoint(){
+        let exp = expectation(description: "---delete device ---")
+        _ = WebServiceManager.shared.removeChildWithDevices(childId: "6137431e1198ab3d9d348068", success: { response in
             exp.fulfill()
         }, failure: { serverError, networkError in
             XCTFail(serverError?.message ?? networkError?.localizedDescription ?? "Unknown")

@@ -14,9 +14,10 @@ public struct DeviceModel: Codable {
     public let deleted: Bool
     public let id, platform, agentID, parentID: String
     public let owner, deviceName, initializationStatus, displayName: String
-    public let role, token, createdAt, updatedAt: String
+    public let role, createdAt, updatedAt: String
     public let v: Int
-    public let connectionStatus: String
+    public let token: String?
+    public let connectionStatus: String?
 
     enum CodingKeys: String, CodingKey {
         case isDefault = "is_default"
@@ -35,3 +36,4 @@ public struct DeviceModel: Codable {
         case connectionStatus = "connection_status"
     }
 }
+
