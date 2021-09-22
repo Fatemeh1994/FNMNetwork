@@ -13,6 +13,4 @@ extension WebServiceManager {
         
         return resumeDataTask(with: .FAQList, success: success, failure: failure).task
     }
-    
-
 }

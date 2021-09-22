@@ -38,7 +38,7 @@ public struct CreateChildModel: Codable {
     public let name: String
     public let birthday: String
     public let gender: String
-    public let avatar: String
+    public let avatar: String?
     public var isDefault: Bool
     public let childId: String
     public let deleted: Bool?

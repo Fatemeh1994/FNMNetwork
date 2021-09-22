@@ -41,7 +41,7 @@ public enum Router: URLRequestConvertible {
     case signOutUser
     case FAQList
     case removeAvatarParent
-    case uploadAvatarParent(Parameters)
+    case uploadAvatarParent
     case checkPassword(Parameters)
     case getAllDevices(page: Int, limit: Int)
     case getOneDevice(deviceId: String)
@@ -151,7 +151,7 @@ public enum Router: URLRequestConvertible {
         case .signOutUser: return "/api/v1/auth/parent/sign-out"
         case .FAQList: return "/api/v1/parent/faq/list"
         case .removeAvatarParent: return "/api/v1/parent/children/remove-avatar"
-        case .uploadAvatarParent: return "/api/v1/parent/parent/upload-avatar"
+        case .uploadAvatarParent: return "/api/v1/parent/upload-avatar"
         case .checkPassword: return "/api/v1/parent/check-password"
         case let .getAllDevices(page, limit): return "/api/v1/parent/devices/list/\(page)/\(limit)"
         case let .getOneDevice(deviceId): return "/api/v1/parent/devices/get-one/\(deviceId)"
@@ -235,8 +235,8 @@ public enum Router: URLRequestConvertible {
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateFcm(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
-        case let .uploadAvatarParent(parameters):
-            request = try JSONEncoding.default.encode(request, with: parameters)
+        case .uploadAvatarParent:
+            request = try URLEncoding.default.encode(request, with: nil)
         case let .checkPassword(parameters):
             request = try JSONEncoding.default.encode(request, with: parameters)
         case let .updateChild(_, parameters):

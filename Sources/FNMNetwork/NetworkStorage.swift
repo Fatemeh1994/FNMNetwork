@@ -30,15 +30,6 @@ public class NetworkStorage {
         }
     }
     
-    public var password: String? {
-        get {
-            UserDefaults.standard.string(forKey: "Password")
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "Password")
-        }
-    }
-    
     public var isParent: Bool? {
         get {
             UserDefaults.standard.value(forKey: "IsParent") as? Bool

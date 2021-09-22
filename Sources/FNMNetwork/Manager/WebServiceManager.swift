@@ -48,6 +48,61 @@ public class WebServiceManager {
             }
         }
     }
+    
+    public func resumeUploadTask<T: Codable,U: Codable>(with request: Router,
+                                                        filePath: URL,
+                                                        name: String,
+                                                        fileName: String,
+                                                        mime: String,
+                                      success: @escaping (T) -> (),
+                                      failure: @escaping (U) -> () ) -> UploadRequest {
+        
+        
+        return SessionManager.shared.session.upload(multipartFormData: { multipartData in
+            multipartData.append(filePath, withName: name, fileName: fileName, mimeType: mime)
+        }, with: request).responseData { [weak self] response in
+            guard let `self` = self else { return }
+            switch response.result {
+            case let .success(value):
+                if let response = response.response,
+                    response.statusCode >= 200 && response.statusCode <= 299 {
+                    
+                    do {
+                        let result = try self.jsonDecoder.decode(T.self, from: value)
+                        success(result)
+                        return
+                    } catch {
+                        debugPrint("🦋🦋🦋🦋🦋🦋")
+                        debugPrint(type(of: T.self))
+                        debugPrint(error)
+                        debugPrint("🦋🦋🦋🦋🦋🦋")
+                        
+                    }
+                } else {
+                    do {
+                        let result = try self.jsonDecoder.decode(U.self, from: value)
+                        failure(result)
+                        return
+                    } catch {
+                        debugPrint("🦋🦋🦋🦋🦋🦋")
+                        debugPrint(type(of: U.self))
+                        debugPrint(error)
+                        debugPrint("🦋🦋🦋🦋🦋🦋")
+                    }
+                }
+    
+            case let .failure(error):
+                if let bodyData = response.request?.httpBody {
+                    print("Upload Body => ",String(data: bodyData, encoding: .utf8))
+                }
+                switch error {
+                case .sessionTaskFailed(error: _): break
+                default: break
+                }
+   
+            }
+        }
+    }
 }
 
 public enum AppError {
