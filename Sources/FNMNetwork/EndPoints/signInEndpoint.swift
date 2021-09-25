@@ -12,13 +12,17 @@ extension WebServiceManager {
         
         guard let agentId = UIDevice.current.identifierForVendor?.uuidString else { fatalError("This phone is without UUID") }
         
-        let parameters = [
+       
+        var parameters = [
             "email": email,
             "password": password,
             "agent_id": agentId,
-            "platform": "ios",
-            "token": fcmToken ?? ""
+            "platform": "ios"
         ]
+        
+        if fcmToken != nil && fcmToken?.isEmpty == false {
+            parameters["token"] = fcmToken!
+        }
         
         return resumeDataTask(with: .signIn(parameters), success: success, failure: failure).task
     }
