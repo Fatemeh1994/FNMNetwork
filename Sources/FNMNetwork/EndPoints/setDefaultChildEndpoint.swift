@@ -17,7 +17,7 @@ extension WebServiceManager {
         }
         
         if !deviceId.isEmpty {
-            parameters["device_id"] = childId
+            parameters["device_id"] = deviceId
         }
 
         return resumeDataTask(with: .setDefaultChild(parameters), success: success, failure: failure).task
