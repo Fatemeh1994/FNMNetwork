@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CreateChildModel.swift
 //  
 //
 //  Created by Reza Khonsari on 5/2/21.
@@ -46,6 +46,8 @@ public struct CreateChildModel: Codable {
     public let createdAt: String?
     public let updatedAt: String?
     public var devices: [CreateDeviceModel]?
+    
+    public var isOnline = false
    
     enum CodingKeys: String, CodingKey {
         case name, birthday, gender, avatar
