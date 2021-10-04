@@ -44,18 +44,31 @@ public struct CreateFenceRequestModel: FenceRequestModel {
     public let coordinates: [Double]
     public let radius: Int
     public let applications: [CreateFenceApplicationModel]
+//    public let description: String
+//    public let allowedToEnter: Bool
+//    public let allowedToExit: Bool
+//    public let isAllowed: Bool
+    
     
     public init(title: String, coordinates: [Double], radius: Int, applications: [CreateFenceApplicationModel]) {
         self.title = title
         self.coordinates = coordinates
         self.radius = radius
         self.applications = applications
+//        self.description = description
+//        self.allowedToEnter = allowedToEnter
+//        self.allowedToExit = allowedToExit
+//        self.isAllowed = isAllowed
     }
     
     enum CodingKeys: String, CodingKey {
         case title
         case coordinates, radius
         case applications
+//        case description
+//        case allowedToEnter = "allowed_to_enter"
+//        case allowedToExit = "allowed_to_exit"
+//        case isAllowed = "is_allowed"
     }
 }
 
