@@ -21,19 +21,19 @@ public struct CreateChildModel: Codable {
         createdAt: String? = nil,
         updatedAt: String? = nil,
         devices: [CreateDeviceModel]? = nil) {
-        
-        self.name = name
-        self.birthday = birthday
-        self.gender = gender
-        self.avatar = avatar
-        self.isDefault = isDefault
-        self.childId = childId
-        self.deleted = deleted
-        self.parentId = parentId
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-        self.devices = devices
-    }
+            
+            self.name = name
+            self.birthday = birthday
+            self.gender = gender
+            self.avatar = avatar
+            self.isDefault = isDefault
+            self.childId = childId
+            self.deleted = deleted
+            self.parentId = parentId
+            self.createdAt = createdAt
+            self.updatedAt = updatedAt
+            self.devices = devices
+        }
     
     public let name: String
     public let birthday: String
@@ -47,8 +47,10 @@ public struct CreateChildModel: Codable {
     public let updatedAt: String?
     public var devices: [CreateDeviceModel]?
     
-    public var isOnline = false
-   
+    public var isOnline: Bool {
+        devices?.contains(where: { $0.isOnline } ) == true
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name, birthday, gender, avatar
         case isDefault = "is_default"
@@ -58,6 +60,5 @@ public struct CreateChildModel: Codable {
         case createdAt
         case updatedAt
         case devices
-        
     }
 }

@@ -25,8 +25,20 @@ public struct CreateDeviceModel: Codable {
     public let agentID: String?
     public let deviceName: String?
     public let displayName: String?
+    public var connectionStatus: String?
     
-    public var isOnline: Bool { status != "offline" }
+    public var isOnline: Bool {
+        get {
+            connectionStatus == "online"
+        }
+        set {
+            if newValue == true {
+                connectionStatus =  "online"
+            } else {
+                connectionStatus = "offline"
+            }
+        }
+    }
         
     enum CodingKeys: String, CodingKey {
         case deleted, platform, owner, role, createdAt, updatedAt
@@ -40,9 +52,10 @@ public struct CreateDeviceModel: Codable {
         case deviceName = "device_name"
         case displayName = "display_name"
         case topics
+        case connectionStatus = "connection_status"
     }
     
-    public init(isDefault: Bool, topics: [String], deviceId: String, deleted: Bool, platform: String, owner: String, parentId: String, role: String, createdAt: String, updatedAt: String, version: Int, status: String?, isActive: Bool, agentID: String?, deviceName: String?, displayName: String?) {
+    public init(isDefault: Bool, topics: [String], deviceId: String, deleted: Bool, platform: String, owner: String, parentId: String, role: String, createdAt: String, updatedAt: String, version: Int, status: String?, isActive: Bool, agentID: String?, deviceName: String?, displayName: String?, connectionStatus: String) {
         self.isDefault = isDefault
         self.topics = topics
         self.deviceId = deviceId
@@ -59,6 +72,7 @@ public struct CreateDeviceModel: Codable {
         self.agentID = agentID
         self.deviceName = deviceName
         self.displayName = displayName
+        self.connectionStatus = connectionStatus
     }
 }
 
