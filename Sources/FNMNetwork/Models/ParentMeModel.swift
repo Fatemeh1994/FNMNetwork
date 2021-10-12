@@ -15,7 +15,7 @@ public struct ParentMeModel: Codable {
     public let createdAt, updatedAt: String
     public let address: String?
     public let avatar: String?
-    public let fullName: String
+    public let fullName: String?
     public let mobile: String?
     public let v: Int
     public let hasPinCode: Bool
