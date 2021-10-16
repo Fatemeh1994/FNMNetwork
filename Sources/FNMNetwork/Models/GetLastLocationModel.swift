@@ -29,8 +29,8 @@ public struct GetLastLocationModel: Codable {
 }
 
 public struct LocationMetaDataModel: Codable {
-    public let bat: String
-    public let address: String
+    public let bat: String?
+    public let address: String?
 
     enum CodingKeys: String, CodingKey {
         case bat, address
